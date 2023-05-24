@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Number Guessing Game</title>
+  <style>
+    table {
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 5px;
+      text-align: center;
+      border: 1px solid black;
+    }
+  </style>
+</head>
+<body>
+  <h1>Number Guessing Game</h1>
+  <p>Guess a 4-digit number:</p>
+  <input type="text" id="guessInput">
+  <button onclick="checkGuess()">Submit</button>
+
+  <h2>Guessing Table</h2>
+  <table id="guessTable">
+    <tr>
+      <th>Attempt</th>
+      <th>Guess</th>
+      <th>Correct Place</th>
+      <th>Correct Digits</th>
+      <th>Incorrect Digits</th>
+    </tr>
+  </table>
+
+  <script src="script.js"></script>
+</body>
+</html>
