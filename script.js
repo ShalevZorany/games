@@ -27,17 +27,17 @@ function checkGuess() {
 
   var correctPlace = 0;
   var correctDigits = 0;
-  var incorrectDigits = 0;
+  var incorrectDigits = 4;
 
   // Check the guess against the target number
   for (var i = 0; i < guess.length; i++) {
     var guessDigit = guess.charAt(i);
     if (guessDigit === targetNumber.charAt(i)) {
       correctPlace++;
+      incorrectDigits--;
     } else if (targetNumber.includes(guessDigit)) {
       correctDigits++;
-    } else {
-      incorrectDigits++;
+      incorrectDigits--;
     }
   }
 
