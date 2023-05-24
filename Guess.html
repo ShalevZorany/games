@@ -4,7 +4,6 @@
   <title>Number Guessing Game</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <style>
-    /* CSS styles go here */
     body {
       font-family: Arial, sans-serif;
       background-color: #f1f1f1;
@@ -121,12 +120,29 @@
       var correctDigits = 0;
       var incorrectDigits = 0;
 
+      var targetDigitsCount = {}; // Object to store digit counts in the target number
+      var guessDigitsCount = {}; // Object to store digit counts in the guess
+
+      // Count the occurrences of each digit in the target number
+      for (var i = 0; i < targetNumber.length; i++) {
+        var digit = targetNumber[i];
+        if (targetDigitsCount[digit]) {
+          targetDigitsCount[digit]++;
+        } else {
+          targetDigitsCount[digit] = 1;
+        }
+      }
+
       // Compare the guess with the target number
       for (var i = 0; i < guessInput.length; i++) {
-        if (guessInput[i] === targetNumber[i]) {
+        var guessDigit = guessInput[i];
+        var targetDigit = targetNumber[i];
+
+        if (guessDigit === targetDigit) {
           correctPlace++;
-        } else if (targetNumber.includes(guessInput[i])) {
+        } else if (targetDigitsCount[guessDigit] && targetDigitsCount[guessDigit] > 0) {
           correctDigits++;
+          targetDigitsCount[guessDigit]--;
         } else {
           incorrectDigits++;
         }
