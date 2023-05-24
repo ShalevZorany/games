@@ -1,70 +1,48 @@
-// Generate a random 4-digit number
-var targetNumber = generateTargetNumber();
-
-// Keep track of the number of attempts
-var attempt = 1;
-
-function generateTargetNumber() {
-  var digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-  var target = "";
-  for (var i = 0; i < 4; i++) {
-    var randomIndex = Math.floor(Math.random() * digits.length);
-    target += digits[randomIndex];
-    digits.splice(randomIndex, 1);
-  }
-  return target;
-}
+let targetNumber = Math.floor(1000 + Math.random() * 9000);  // 4 digit random number
+let attempt = 0;
 
 function checkGuess() {
-  var guessInput = document.getElementById("guessInput");
-  var guess = guessInput.value;
-
-  // Validate the guess
-  if (guess.length !== 4 || isNaN(guess)) {
-    alert("Please enter a 4-digit number.");
+  let guessInput = document.getElementById('guessInput');
+  let guessTable = document.getElementById('guessTable');
+  
+  if (guessInput.value.length != 4) {
+    alert('Please enter a 4-digit number');
     return;
   }
-
-  var correctPlace = 0;
-  var correctDigits = 0;
-  var incorrectDigits = 0;
-
-  // Check the guess against the target number
-  for (var i = 0; i < guess.length; i++) {
-    var guessDigit = guess.charAt(i);
-    if (guessDigit === targetNumber.charAt(i)) {
+  
+  let guessNumber = parseInt(guessInput.value, 10);
+  
+  if (isNaN(guessNumber)) {
+    alert('Invalid number');
+    return;
+  }
+  
+  attempt++;
+  
+  let correctPlace = 0;
+  let correctDigits = 0;
+  let incorrectDigits = 0;
+  
+  for (let i = 0; i < 4; i++) {
+    if (guessInput.value[i] == String(targetNumber)[i]) {
       correctPlace++;
-    } else if (targetNumber.includes(guessDigit)) {
+    } else if (String(targetNumber).includes(guessInput.value[i])) {
       correctDigits++;
     } else {
       incorrectDigits++;
     }
   }
-
-  // Display the results in the table
-  var guessTable = document.getElementById("guessTable");
-  var row = guessTable.insertRow(-1);
-  var attemptCell = row.insertCell(0);
-  var guessCell = row.insertCell(1);
-  var correctPlaceCell = row.insertCell(2);
-  var correctDigitsCell = row.insertCell(3);
-  var incorrectDigitsCell = row.insertCell(4);
-
-  attemptCell.innerHTML = attempt;
-  guessCell.innerHTML = guess;
-  correctPlaceCell.innerHTML = correctPlace;
-  correctDigitsCell.innerHTML = correctDigits;
-  incorrectDigitsCell.innerHTML = incorrectDigits;
-
-  // Increment the attempt counter
-  attempt++;
-
-  // Check if the guess is correct
-  if (correctPlace === 4) {
-    alert("Congratulations! You guessed the number correctly.");
-    guessInput.disabled = true;
-  } else {
-    guessInput.value = "";
-    guessInput.focus();
+  
+  let newRow = guessTable.insertRow();
+  newRow.insertCell(0).textContent = attempt;
+  newRow.insertCell(1).textContent = guessNumber;
+  newRow.insertCell(2).textContent = correctPlace;
+  newRow.insertCell(3).textContent = correctDigits;
+  newRow.insertCell(4).textContent = incorrectDigits;
+  
+  if (guessNumber == targetNumber) {
+    alert('Congratulations! You guessed the number.');
   }
+  
+  guessInput.value = '';
 }
