@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Number Guessing Game</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -17,6 +17,14 @@
     p {
       color: #555;
       text-align: center;
+    }
+    
+    .center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
     }
     
     input[type="text"] {
@@ -65,7 +73,7 @@
 <body>
   <h1>Number Guessing Game</h1>
   <p>Guess a 4-digit number:</p>
-  <div>
+  <div class="center">
     <input type="text" id="guessInput">
     <button onclick="checkGuess()">Submit</button>
   </div>
