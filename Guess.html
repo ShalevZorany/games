@@ -74,7 +74,7 @@
   <p>Guess a 4-digit number:</p>
   <div>
     <input type="text" id="guessInput">
-    <button onclick="checkGuess()">Submit</button>
+    <button onclick="startGame()">Start</button>
   </div>
 
   <h2>Guessing Table</h2>
@@ -88,12 +88,19 @@
     </tr>
   </table>
 
-  <div class="timer" id="timer">60</div>
+  <div class="timer" id="timer"></div>
   
   <script>
     var timeLeft = 60;
     var timerElement = document.getElementById('timer');
     var timer;
+
+    function startGame() {
+      startTimer();
+      document.getElementById('guessInput').disabled = false;
+      document.getElementById('guessInput').focus();
+      document.getElementById('startBtn').disabled = true;
+    }
 
     function startTimer() {
       timer = setInterval(function() {
@@ -108,10 +115,6 @@
     }
 
     function checkGuess() {
-      if (timeLeft === 60) {
-        startTimer();
-      }
-
       // Add your existing guess checking logic here
     }
 
