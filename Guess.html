@@ -4,7 +4,6 @@
   <title>Number Guessing Game</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <style>
-    /* CSS styles go here */
     body {
       font-family: Arial, sans-serif;
       background-color: #f1f1f1;
@@ -48,12 +47,6 @@
       border: 1px solid black;
     }
     
-    .timer {
-      text-align: center;
-      font-size: 20px;
-      margin-top: 10px;
-    }
-    
     @media (max-width: 600px) {
       input[type="text"] {
         width: 80px;
@@ -88,66 +81,6 @@
     </tr>
   </table>
 
-  <div class="timer" id="timer"></div>
-  
-  <script>
-    var timeLeft = 60;
-    var timerElement = document.getElementById('timer');
-    var timer;
-
-    function startTimer() {
-      timer = setInterval(function() {
-        timeLeft--;
-        timerElement.textContent = timeLeft;
-
-        if (timeLeft <= 0) {
-          clearInterval(timer);
-          disqualifyPlayer();
-        }
-      }, 1000);
-    }
-
-    function checkGuess() {
-      if (timeLeft === 60) {
-        startTimer();
-      }
-
-      var guessInput = document.getElementById('guessInput').value;
-      var guessTable = document.getElementById('guessTable');
-
-      // Add your guess checking logic here
-      var targetNumber = '1234'; // Replace with your actual target number
-      var correctPlace = 0;
-      var correctDigits = 0;
-      var incorrectDigits = 0;
-
-      for (var i = 0; i < guessInput.length; i++) {
-        if (guessInput[i] === targetNumber[i]) {
-          correctPlace++;
-        }
-      }
-
-      // Create a new row in the table to display the guess result
-      var newRow = guessTable.insertRow();
-      var attemptCell = newRow.insertCell();
-      var guessCell = newRow.insertCell();
-      var correctPlaceCell = newRow.insertCell();
-      var correctDigitsCell = newRow.insertCell();
-      var incorrectDigitsCell = newRow.insertCell();
-
-      attemptCell.textContent = guessTable.rows.length - 1;
-      guessCell.textContent = guessInput;
-      correctPlaceCell.textContent = correctPlace;
-      correctDigitsCell.textContent = correctDigits;
-      incorrectDigitsCell.textContent = incorrectDigits;
-
-      document.getElementById('guessInput').value = '';
-    }
-
-    function disqualifyPlayer() {
-      alert('Time is up! You are disqualified.');
-      // Add any additional actions to be taken when the player is disqualified
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
