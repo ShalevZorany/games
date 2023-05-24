@@ -4,6 +4,7 @@
   <title>Number Guessing Game</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <style>
+    /* CSS styles go here */
     body {
       font-family: Arial, sans-serif;
       background-color: #f1f1f1;
@@ -47,6 +48,12 @@
       border: 1px solid black;
     }
     
+    .timer {
+      text-align: center;
+      font-size: 20px;
+      margin-top: 10px;
+    }
+    
     @media (max-width: 600px) {
       input[type="text"] {
         width: 80px;
@@ -81,6 +88,37 @@
     </tr>
   </table>
 
-  <script src="script.js"></script>
+  <div class="timer" id="timer">60</div>
+
+  <script>
+    var timeLeft = 60;
+    var timerElement = document.getElementById('timer');
+
+    function startTimer() {
+      var timer = setInterval(function() {
+        timeLeft--;
+        timerElement.textContent = timeLeft;
+        
+        if (timeLeft <= 0) {
+          clearInterval(timer);
+          disqualifyPlayer();
+        }
+      }, 1000);
+    }
+
+    function checkGuess() {
+      // Add your existing guess checking logic here
+
+      // Start the timer when the first guess is made
+      if (timeLeft === 60) {
+        startTimer();
+      }
+    }
+
+    function disqualifyPlayer() {
+      alert('Time is up! You are disqualified.');
+      // Add any additional actions to be taken when the player is disqualified
+    }
+  </script>
 </body>
 </html>
