@@ -2,22 +2,73 @@
 <html>
 <head>
   <title>Number Guessing Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    table {
-      border-collapse: collapse;
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f1f1f1;
     }
+    
+    h1 {
+      color: #333;
+      text-align: center;
+    }
+    
+    p {
+      color: #555;
+      text-align: center;
+    }
+    
+    input[type="text"] {
+      padding: 5px;
+      border: 1px solid #999;
+      border-radius: 3px;
+      width: 100px;
+    }
+    
+    button {
+      padding: 5px 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    
     th, td {
       padding: 5px;
       text-align: center;
       border: 1px solid black;
+    }
+    
+    @media (max-width: 600px) {
+      input[type="text"] {
+        width: 80px;
+      }
+      
+      button {
+        font-size: 12px;
+      }
+      
+      table {
+        font-size: 12px;
+      }
     }
   </style>
 </head>
 <body>
   <h1>Number Guessing Game</h1>
   <p>Guess a 4-digit number:</p>
-  <input type="text" id="guessInput">
-  <button onclick="checkGuess()">Submit</button>
+  <div>
+    <input type="text" id="guessInput">
+    <button onclick="checkGuess()">Submit</button>
+  </div>
 
   <h2>Guessing Table</h2>
   <table id="guessTable">
