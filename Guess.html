@@ -89,16 +89,17 @@
   </table>
 
   <div class="timer" id="timer">60</div>
-
+  
   <script>
     var timeLeft = 60;
     var timerElement = document.getElementById('timer');
+    var timer;
 
     function startTimer() {
-      var timer = setInterval(function() {
+      timer = setInterval(function() {
         timeLeft--;
         timerElement.textContent = timeLeft;
-        
+
         if (timeLeft <= 0) {
           clearInterval(timer);
           disqualifyPlayer();
@@ -107,12 +108,11 @@
     }
 
     function checkGuess() {
-      // Add your existing guess checking logic here
-
-      // Start the timer when the first guess is made
       if (timeLeft === 60) {
         startTimer();
       }
+
+      // Add your existing guess checking logic here
     }
 
     function disqualifyPlayer() {
