@@ -7,6 +7,9 @@
     body {
       font-family: Arial, sans-serif;
       background-color: #f1f1f1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     
     h1 {
@@ -17,14 +20,6 @@
     p {
       color: #555;
       text-align: center;
-    }
-    
-    .center {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      flex-direction: column;
     }
     
     input[type="text"] {
@@ -44,7 +39,7 @@
     }
     
     table {
-      width: 100%;
+      width: 80%;  /* Adjust width as needed */
       border-collapse: collapse;
       margin-top: 20px;
     }
@@ -66,6 +61,7 @@
       
       table {
         font-size: 12px;
+        width: 100%;
       }
     }
   </style>
@@ -73,7 +69,7 @@
 <body>
   <h1>Number Guessing Game</h1>
   <p>Guess a 4-digit number:</p>
-  <div class="center">
+  <div>
     <input type="text" id="guessInput">
     <button onclick="checkGuess()">Submit</button>
   </div>
