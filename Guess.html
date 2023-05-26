@@ -39,7 +39,7 @@
     }
 
     table {
-      width: 80%;  /* Adjust width as needed */
+      width: 80%;
       border-collapse: collapse;
       margin-top: 20px;
     }
@@ -76,13 +76,17 @@
 
   <h2>Guessing Table</h2>
   <table id="guessTable">
-    <tr>
-      <th>Attempt</th>
-      <th>Guess</th>
-      <th>Correct Place</th>
-      <th>Correct Digits</th>
-      <th>Incorrect Digits</th>
-    </tr>
+    <thead>
+      <tr>
+        <th>Attempt</th>
+        <th>Guess</th>
+        <th>Correct Place</th>
+        <th>Correct Digits</th>
+        <th>Incorrect Digits</th>
+      </tr>
+    </thead>
+    <tbody id="guessTableBody">
+    </tbody>
   </table>
 
   <script>
@@ -98,20 +102,22 @@
         addGuessToTable(guess, result);
         guessInput.value = '';
       } else {
-        alert('Invalid guess. Please ensure there are no consecutive identical digits.');
+        alert('Invalid guess. Please ensure there are no repeated digits.');
         guessInput.value = '';
       }
     }
 
     function generateSecretNumber() {
-      // Create a 4-digit secret number
       return Math.floor(1000 + Math.random() * 9000).toString();
     }
 
     function isGuessValid(guess) {
-      for (var i = 0; i < guess.length - 1; i++) {
-        if (guess[i] === guess[i + 1]) {
+      var count = {};
+      for (var i = 0; i < guess.length; i++) {
+        if (guess[i] in count) {
           return false;
+        } else {
+          count[guess[i]] = true;
         }
       }
       return true;
@@ -125,7 +131,6 @@
       var secretDigitsCount = countDigits(secretNumber);
       var guessDigitsCount = countDigits(guess);
 
-      // Calculate correct place and correct digits
       for (var i = 0; i < guess.length; i++) {
         if (guess[i] === secretNumber[i]) {
           correctPlace++;
@@ -134,7 +139,6 @@
         }
       }
 
-      // Calculate incorrect digits
       incorrectDigits = 4 - correctPlace - correctDigits;
 
       return {
@@ -157,8 +161,8 @@
     }
 
     function addGuessToTable(guess, result) {
-      var guessTable = document.getElementById('guessTable');
-      var newRow = guessTable.insertRow();
+      var guessTable = document.getElementById('guessTableBody');
+      var newRow = guessTable.insertRow(0);
 
       var cell1 = newRow.insertCell(0);
       var cell2 = newRow.insertCell(1);
