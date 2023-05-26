@@ -88,6 +88,10 @@
     <tbody id="guessTableBody">
     </tbody>
   </table>
+  
+  <div>
+    <button onclick="adminLogin()">Admin</button>
+  </div>
 
   <script>
     var attemptCounter = 1;
@@ -112,13 +116,22 @@
     }
 
     function generateSecretNumber() {
-      return Math.floor(1000 + Math.random() * 9000).toString();
+      var secretNum = '';
+      var digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
+      for (var i = 0; i < 4; i++) {
+        var randomIndex = Math.floor(Math.random() * digits.length);
+        secretNum += digits[randomIndex];
+        digits.splice(randomIndex, 1);
+      }
+
+      return secretNum;
     }
 
     function isGuessValid(guess) {
       var count = {};
       for (var i = 0; i < guess.length; i++) {
-        if (guess[i] in count) {
+        if (guess[i] in count || guess.lastIndexOf(guess[i]) !== i) {
           return false;
         } else {
           count[guess[i]] = true;
@@ -181,6 +194,15 @@
       cell3.innerHTML = result.correctPlace;
       cell4.innerHTML = result.correctDigits;
       cell5.innerHTML = result.incorrectDigits;
+    }
+    
+    function adminLogin() {
+      var password = prompt("Please enter the admin password:");
+      if (password === "rimon8900") {
+        alert("The secret number is: " + secretNumber);
+      } else {
+        alert("Incorrect password. Access denied.");
+      }
     }
   </script>
 </body>
