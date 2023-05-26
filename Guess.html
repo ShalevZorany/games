@@ -36,7 +36,7 @@
       border: none;
       border-radius: 3px;
       cursor: pointer;
-      margin-top: 10px; /* Add margin to separate the buttons */
+      margin-top: 10px;
     }
 
     table {
@@ -71,6 +71,14 @@
       }
     }
   </style>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-WB85S2WQVS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-WB85S2WQVS');
+  </script>
 </head>
 <body>
   <h1>Number Guessing Game</h1>
@@ -95,7 +103,7 @@
     </tbody>
   </table>
 
-  <button onclick="adminLogin()">Admin</button> <!-- Moved the admin button outside the div -->
+  <button onclick="adminLogin()">Admin</button>
 
   <div class="footer">
     <p>Created by Shalev Zorany</p>
