@@ -101,6 +101,10 @@
         var result = compareGuessAndSecret(guess);
         addGuessToTable(guess, result);
         guessInput.value = '';
+
+        if (result.correctPlace === 4) {
+          alert('Congratulations! You won the game!');
+        }
       } else {
         alert('Invalid guess. Please ensure there are no repeated digits.');
         guessInput.value = '';
@@ -134,8 +138,10 @@
       for (var i = 0; i < guess.length; i++) {
         if (guess[i] === secretNumber[i]) {
           correctPlace++;
-        } else if (secretNumber.includes(guess[i])) {
+          secretDigitsCount[guess[i]]--;
+        } else if (secretDigitsCount[guess[i]] > 0) {
           correctDigits++;
+          secretDigitsCount[guess[i]]--;
         }
       }
 
