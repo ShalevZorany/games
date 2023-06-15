@@ -1,1 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Advanced Number Guessing Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <style>
+    /* CSS styles */
+  </style>
+</head>
+<body>
+  <h1>Advanced Number Guessing Game</h1>
+  <p>Level: <span id="level"></span></p>
+  <p>Score: <span id="score"></span></p>
+  <p>Number of Digits: <span id="digits">2</span></p>
+  <p id="guessInputLabel">Guess a 2-digit number (excluding 0):</p>
+  <div>
+    <input type="text" id="guessInput">
+    <button id="submitBtn">Submit</button>
+    <button id="hintBtn">Hint</button>
+  </div>
+
+  <h2>Guessing Table</h2>
+  <table id="guessTable">
+    <thead>
+      <tr>
+        <th>Attempt</th>
+        <th>Guess</th>
+        <th>Correct Place</th>
+        <th>Correct Digits</th>
+        <th>Incorrect Digits</th>
+      </tr>
+    </thead>
+    <tbody id="guessTableBody">
+    </tbody>
+  </table>
+
+  <button id="adminBtn">Admin</button>
+
+  <div class="footer">
+    <p>Created by Your Name</p>
+    <p>Created by Shalev Zorany</p>
+    <a href="https://www.facebook.com/shalev.zorany/" target="_blank">Visit my Facebook page</a>
+    <br>
+    <a href="https://twitter.com/ZoranyShalev" target="_blank">Follow me on Twitter</a>
+    <br>
+    <a href="https://www.instagram.com/shalevzorany/" target="_blank">Follow me on Instagram</a>
+    <br>
+    <a href="https://www.tiktok.com/@shalevzoranyapple" target="_blank">Follow me on TikTok</a>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
 
