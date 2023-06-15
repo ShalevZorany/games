@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Number Guessing Game</title>
+  <title>Advanced Number Guessing Game</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <style>
     body {
@@ -10,16 +10,20 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      margin: 0;
+      padding: 0;
     }
 
     h1 {
       color: #333;
       text-align: center;
+      margin-top: 20px;
     }
 
     p {
       color: #555;
       text-align: center;
+      margin: 10px 0;
     }
 
     input[type="text"] {
@@ -56,6 +60,23 @@
       text-align: center;
     }
 
+    .footer p {
+      margin-bottom: 5px;
+    }
+
+    .footer a {
+      display: inline-block;
+      margin-right: 10px;
+      color: #333;
+      text-decoration: none;
+      border-bottom: 1px solid #333;
+      transition: border-bottom-color 0.3s ease-in-out;
+    }
+
+    .footer a:hover {
+      border-bottom-color: transparent;
+    }
+
     @media (max-width: 600px) {
       input[type="text"] {
         width: 80px;
@@ -71,21 +92,17 @@
       }
     }
   </style>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-WB85S2WQVS"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-WB85S2WQVS');
-  </script>
 </head>
 <body>
-  <h1>Number Guessing Game</h1>
-  <p>Guess a 4-digit number:</p>
+  <h1>Advanced Number Guessing Game</h1>
+  <p>Level: <span id="level"></span></p>
+  <p>Score: <span id="score"></span></p>
+  <p>Number of Digits: <span id="digits">2</span></p>
+  <p id="guessInputLabel">Guess a 2-digit number (excluding 0):</p>
   <div>
     <input type="text" id="guessInput">
-    <button onclick="checkGuess()">Submit</button>
+    <button id="submitBtn">Submit</button>
+    <button id="hintBtn">Hint</button>
   </div>
 
   <h2>Guessing Table</h2>
@@ -103,135 +120,20 @@
     </tbody>
   </table>
 
-  <button onclick="adminLogin()">Admin</button>
+  <button id="adminBtn">Admin</button>
 
-<div class="footer">
-  <p>Created by Shalev Zorany</p>
-  <a href="https://www.facebook.com/shalev.zorany/" target="_blank">Visit my Facebook page</a>
-  <br>
-  <a href="https://twitter.com/ZoranyShalev" target="_blank">Follow me on Twitter</a>
-  <br>
-  <a href="https://www.instagram.com/shalevzorany/" target="_blank">Follow me on Instagram</a>
-  <br>
-  <a href="https://www.tiktok.com/@shalevzoranyapple" target="_blank">Follow me on TikTok</a>
-</div>
+  <div class="footer">
+    <p>Created by Your Name</p>
+    <p>Created by Shalev Zorany</p>
+    <a href="https://www.facebook.com/shalev.zorany/" target="_blank">Visit my Facebook page</a>
+    <br>
+    <a href="https://twitter.com/ZoranyShalev" target="_blank">Follow me on Twitter</a>
+    <br>
+    <a href="https://www.instagram.com/shalevzorany/" target="_blank">Follow me on Instagram</a>
+    <br>
+    <a href="https://www.tiktok.com/@shalevzoranyapple" target="_blank">Follow me on TikTok</a>
+  </div>
 
-
-  <script>
-    var attemptCounter = 1;
-    var secretNumber = generateSecretNumber();
-
-    function checkGuess() {
-      var guessInput = document.getElementById('guessInput');
-      var guess = guessInput.value;
-
-      if (isGuessValid(guess)) {
-        var result = compareGuessAndSecret(guess);
-        addGuessToTable(guess, result);
-        guessInput.value = '';
-
-        if (result.correctPlace === 4) {
-          alert('Congratulations! You won the game!');
-        }
-      } else {
-        alert('Invalid guess. Please ensure there are no repeated digits.');
-        guessInput.value = '';
-      }
-    }
-
-    function generateSecretNumber() {
-      var secretNum = '';
-      var digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-
-      for (var i = 0; i < 4; i++) {
-        var randomIndex = Math.floor(Math.random() * digits.length);
-        secretNum += digits[randomIndex];
-        digits.splice(randomIndex, 1);
-      }
-
-      return secretNum;
-    }
-
-    function isGuessValid(guess) {
-      var count = {};
-      for (var i = 0; i < guess.length; i++) {
-        if (guess[i] in count || guess.lastIndexOf(guess[i]) !== i) {
-          return false;
-        } else {
-          count[guess[i]] = true;
-        }
-      }
-      return true;
-    }
-
-    function compareGuessAndSecret(guess) {
-      var correctPlace = 0;
-      var correctDigits = 0;
-      var incorrectDigits = 0;
-
-      var secretDigitsCount = countDigits(secretNumber);
-      var guessDigitsCount = countDigits(guess);
-
-      for (var i = 0; i < guess.length; i++) {
-        if (guess[i] === secretNumber[i]) {
-          correctPlace++;
-          secretDigitsCount[guess[i]]--;
-        } else if (secretDigitsCount[guess[i]] > 0) {
-          correctDigits++;
-          secretDigitsCount[guess[i]]--;
-        }
-      }
-
-      incorrectDigits = 4 - correctPlace - correctDigits;
-
-      return {
-        correctPlace: correctPlace,
-        correctDigits: correctDigits,
-        incorrectDigits: incorrectDigits
-      };
-    }
-
-    function countDigits(number) {
-      var count = {};
-      for (var i = 0; i < number.length; i++) {
-        if (number[i] in count) {
-          count[number[i]]++;
-        } else {
-          count[number[i]] = 1;
-        }
-      }
-      return count;
-    }
-
-    function addGuessToTable(guess, result) {
-      var guessTable = document.getElementById('guessTableBody');
-      var newRow = guessTable.insertRow(0);
-
-      var cell1 = newRow.insertCell(0);
-      var cell2 = newRow.insertCell(1);
-      var cell3 = newRow.insertCell(2);
-      var cell4 = newRow.insertCell(3);
-      var cell5 = newRow.insertCell(4);
-
-      cell1.innerHTML = attemptCounter++;
-      cell2.innerHTML = guess;
-      cell3.innerHTML = result.correctPlace;
-      cell4.innerHTML = result.correctDigits;
-      cell5.innerHTML = result.incorrectDigits;
-    }
-    
-function adminLogin() {
-    var password = prompt("Please enter the admin password:");
-    
-    // This is the password 'Check2323' encoded in Base64
-    var encodedPassword = "Q2hlY2syMzIz";
-
-    if (btoa(password) === encodedPassword) {
-        alert("The secret number is: " + secretNumber);
-    } else {
-        alert("Incorrect password. Access denied.");
-    }
-}
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
