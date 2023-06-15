@@ -221,12 +221,16 @@
     }
     
 function adminLogin() {
-  var password = prompt("Please enter the admin password:");
-  if (password === "Check2323") {
-    alert("The secret number is: " + secretNumber);
-  } else {
-    alert("Incorrect password. Access denied.");
-  }
+    var password = prompt("Please enter the admin password:");
+    
+    // This is the password 'Check2323' encoded in Base64
+    var encodedPassword = "Q2hlY2syMzIz";
+
+    if (btoa(password) === encodedPassword) {
+        alert("The secret number is: " + secretNumber);
+    } else {
+        alert("Incorrect password. Access denied.");
+    }
 }
   </script>
 </body>
