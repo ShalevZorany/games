@@ -1,106 +1,74 @@
-/* Reset default browser styles */
+/* CSS Variables */
+:root {
+  --primary-color: #006a4e;
+  --secondary-color: #ffbd69;
+  --accent-color: #ec4646;
+  --spacing-small: 10px;
+  --spacing-medium: 20px;
+  --spacing-large: 40px;
+  --font-family: 'Roboto', sans-serif; /* You can choose any Google font you want */
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Set a background color */
 body {
   background-color: #f5f5f5;
-  font-family: Arial, sans-serif;
+  font-family: var(--font-family);
 }
 
-/* Center the game container */
 .game-container {
   max-width: 800px;
-  margin: 0 auto;
-  padding: 40px;
+  margin: var(--spacing-large) auto;
+  padding: var(--spacing-large);
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Style the game title */
 .game-title {
   font-size: 36px;
   font-weight: bold;
-  color: #333;
-  margin-bottom: 20px;
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-medium);
   text-align: center;
 }
 
-/* Style the rules container */
-.rules-container {
-  margin-bottom: 30px;
-}
-
-/* Style the rules section */
-.rules {
-  background-color: #f9f9f9;
-  padding: 20px;
-  border-radius: 8px;
-}
-
-/* Style the rules heading */
-.rules h2 {
-  font-size: 24px;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 10px;
-}
-
-/* Style the rules list */
-.rules ul {
-  list-style-type: disc;
-  margin-left: 20px;
-}
-
-/* Style the scoring section */
+.rules-container,
 .scoring {
   background-color: #f9f9f9;
-  padding: 20px;
+  padding: var(--spacing-medium);
   border-radius: 8px;
-  margin-bottom: 30px;
+  margin-bottom: var(--spacing-large);
 }
 
-/* Style the scoring heading */
+.rules h2,
 .scoring h2 {
   font-size: 24px;
   font-weight: bold;
-  color: #333;
-  margin-bottom: 10px;
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-small);
 }
 
-/* Style the scoring paragraphs */
-.scoring p {
-  margin-bottom: 10px;
-}
-
-/* Style the scoring lists */
+.rules ul,
 .scoring ul {
   list-style-type: disc;
   margin-left: 20px;
 }
 
-/* Style the game info section */
 .game-info {
-  margin-bottom: 30px;
+  margin-bottom: var(--spacing-large);
 }
 
-/* Style the game info paragraphs */
-.game-info p {
-  margin-bottom: 10px;
-}
-
-/* Style the input container */
 .input-container {
   display: flex;
   align-items: center;
-  margin-top: 10px;
+  margin-top: var(--spacing-small);
 }
 
-/* Style the guess input field */
 #guessInput {
   flex: 1;
   padding: 8px;
@@ -109,65 +77,62 @@ body {
   border-radius: 4px;
 }
 
-/* Style the submit button */
-.submit-button {
-  padding: 8px 16px;
-  font-size: 16px;
-  font-weight: bold;
-  background-color: #333;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  margin-left: 10px;
-  cursor: pointer;
-}
-
-/* Style the hint button */
-.hint-button {
-  padding: 8px 16px;
-  font-size: 16px;
-  font-weight: bold;
-  background-color: #ccc;
-  color: #333;
-  border: none;
-  border-radius: 4px;
-  margin-left: 10px;
-  cursor: pointer;
-}
-
-/* Style the admin button */
+.submit-button,
+.hint-button,
 .admin-button {
   padding: 8px 16px;
   font-size: 16px;
   font-weight: bold;
-  background-color: #ff5252;
-  color: #fff;
   border: none;
   border-radius: 4px;
-  margin-left: 10px;
+  margin-left: var(--spacing-small);
   cursor: pointer;
+  transition: all 0.3s ease; /* Add transition */
 }
 
-/* Style the game table */
+.submit-button {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.submit-button:hover {
+  background-color: #004c37;
+}
+
+.hint-button {
+  background-color: var(--secondary-color);
+  color: #333;
+}
+
+.hint-button:hover {
+  background-color: #cca353;
+}
+
+.admin-button {
+  background-color: var(--accent-color);
+  color: #fff;
+}
+
+.admin-button:hover {
+  background-color: #bf1d1d;
+}
+
 .game-table {
-  margin-bottom: 30px;
+  margin-bottom: var(--spacing-large);
 }
 
-/* Style the game table heading */
 .game-table h2 {
   font-size: 24px;
   font-weight: bold;
-  color: #333;
-  margin-bottom: 20px;
+  color: var(--primary-color);
+  margin-bottom: var(--spacing-medium);
 }
 
-/* Style the guess table */
 #guessTable {
   width: 100%;
   border-collapse: collapse;
 }
 
-/* Style the guess table header */
 #guessTable thead th {
   font-weight: bold;
   text-align: left;
@@ -175,59 +140,7 @@ body {
   border-bottom: 2px solid #333;
 }
 
-/* Style the guess table body */
 #guessTableBody td {
   padding: 8px;
   border-bottom: 1px solid #ccc;
-}
-
-/* Style the footer */
-.footer {
-  text-align: center;
-  font-size: 14px;
-  margin-top: 20px;
-}
-
-/* Style the footer links */
-.footer a {
-  color: #333;
-  text-decoration: none;
-  margin-right: 10px;
-  background-color: yellow;
-  padding: 2px 4px;
-  border-radius: 4px;
-}
-
-/* Style the footer links on hover */
-.footer a:hover {
-  text-decoration: underline;
-  background-color: orange;
-  color: #fff;
-}
-
-/* Responsive styles for mobile devices */
-@media (max-width: 600px) {
-  .game-container {
-    padding: 20px;
-  }
-
-  .game-title {
-    font-size: 24px;
-  }
-
-  .rules {
-    padding: 10px;
-  }
-
-  .scoring {
-    padding: 10px;
-  }
-
-  .input-container {
-    flex-direction: column;
-  }
-
-  #guessInput {
-    margin-top: 10px;
-  }
 }
