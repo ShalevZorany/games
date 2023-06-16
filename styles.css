@@ -1,14 +1,4 @@
-/* CSS Variables */
-:root {
-  --primary-color: #006a4e;
-  --secondary-color: #ffbd69;
-  --accent-color: #ec4646;
-  --spacing-small: 10px;
-  --spacing-medium: 20px;
-  --spacing-large: 40px;
-  --font-family: 'Roboto', sans-serif; /* You can choose any Google font you want */
-}
-
+/* Reset default browser styles */
 * {
   margin: 0;
   padding: 0;
@@ -17,13 +7,13 @@
 
 body {
   background-color: #f5f5f5;
-  font-family: var(--font-family);
+  font-family: 'Roboto', sans-serif;
 }
 
 .game-container {
   max-width: 800px;
-  margin: var(--spacing-large) auto;
-  padding: var(--spacing-large);
+  margin: 0 auto;
+  padding: 40px;
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -32,100 +22,113 @@ body {
 .game-title {
   font-size: 36px;
   font-weight: bold;
-  color: var(--primary-color);
-  margin-bottom: var(--spacing-medium);
+  color: #333;
+  margin-bottom: 20px;
   text-align: center;
 }
 
-.rules-container,
-.scoring {
-  background-color: #f9f9f9;
-  padding: var(--spacing-medium);
-  border-radius: 8px;
-  margin-bottom: var(--spacing-large);
+.rules-container {
+  margin-bottom: 30px;
 }
 
-.rules h2,
+.rules {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.rules h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.rules ul {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+.scoring {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+}
+
 .scoring h2 {
   font-size: 24px;
   font-weight: bold;
-  color: var(--primary-color);
-  margin-bottom: var(--spacing-small);
+  color: #333;
+  margin-bottom: 10px;
 }
 
-.rules ul,
+.scoring p {
+  margin-bottom: 10px;
+}
+
 .scoring ul {
   list-style-type: disc;
   margin-left: 20px;
 }
 
 .game-info {
-  margin-bottom: var(--spacing-large);
+  margin-bottom: 30px;
+}
+
+.game-info p {
+  margin-bottom: 10px;
 }
 
 .input-container {
   display: flex;
+  flex-wrap: wrap; /* NEW */
   align-items: center;
-  margin-top: var(--spacing-small);
+  justify-content: space-between; /* NEW */
+  margin-top: 10px;
 }
 
-#guessInput {
-  flex: 1;
+#guessInput, .submit-button, .hint-button, .admin-button {
+  flex: 1 0 100%; /* NEW */
+  margin-top: 10px; /* NEW */
   padding: 8px;
   font-size: 16px;
-  border: 1px solid #ccc;
   border-radius: 4px;
-}
-
-.submit-button,
-.hint-button,
-.admin-button {
-  padding: 8px 16px;
-  font-size: 16px;
-  font-weight: bold;
-  border: none;
-  border-radius: 4px;
-  margin-left: var(--spacing-small);
-  cursor: pointer;
-  transition: all 0.3s ease; /* Add transition */
 }
 
 .submit-button {
-  background-color: var(--primary-color);
+  font-weight: bold;
+  background-color: #333;
   color: #fff;
-}
-
-.submit-button:hover {
-  background-color: #004c37;
+  border: none;
+  cursor: pointer;
 }
 
 .hint-button {
-  background-color: var(--secondary-color);
+  font-weight: bold;
+  background-color: #ccc;
   color: #333;
-}
-
-.hint-button:hover {
-  background-color: #cca353;
+  border: none;
+  cursor: pointer;
 }
 
 .admin-button {
-  background-color: var(--accent-color);
+  font-weight: bold;
+  background-color: #ff5252;
   color: #fff;
-}
-
-.admin-button:hover {
-  background-color: #bf1d1d;
+  border: none;
+  cursor: pointer;
 }
 
 .game-table {
-  margin-bottom: var(--spacing-large);
+  margin-bottom: 30px;
 }
 
 .game-table h2 {
   font-size: 24px;
   font-weight: bold;
-  color: var(--primary-color);
-  margin-bottom: var(--spacing-medium);
+  color: #333;
+  margin-bottom: 20px;
 }
 
 #guessTable {
@@ -143,4 +146,19 @@ body {
 #guessTableBody td {
   padding: 8px;
   border-bottom: 1px solid #ccc;
+}
+
+.footer {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 20px;
+}
+
+.footer a {
+  color: #333;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
 }
