@@ -1,54 +1,206 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Advanced Number Guessing Game</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <style>
-    /* CSS styles */
-  </style>
-</head>
-<body>
-  <h1>Advanced Number Guessing Game</h1>
-  <p>Level: <span id="level"></span></p>
-  <p>Score: <span id="score"></span></p>
-  <p>Number of Digits: <span id="digits">2</span></p>
-  <p id="guessInputLabel">Guess a 2-digit number (excluding 0):</p>
-  <div>
-    <input type="text" id="guessInput">
-    <button id="submitBtn">Submit</button>
-    <button id="hintBtn">Hint</button>
-  </div>
+/* Reset default browser styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  <h2>Guessing Table</h2>
-  <table id="guessTable">
-    <thead>
-      <tr>
-        <th>Attempt</th>
-        <th>Guess</th>
-        <th>Correct Place</th>
-        <th>Correct Digits</th>
-        <th>Incorrect Digits</th>
-      </tr>
-    </thead>
-    <tbody id="guessTableBody">
-    </tbody>
-  </table>
+/* Set a background color */
+body {
+  background-color: #f5f5f5;
+  font-family: Arial, sans-serif;
+}
 
-  <button id="adminBtn">Admin</button>
+/* Center the game container */
+.game-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 
-  <div class="footer">
-    <p>Created by Your Name</p>
-    <p>Created by Shalev Zorany</p>
-    <a href="https://www.facebook.com/shalev.zorany/" target="_blank">Visit my Facebook page</a>
-    <br>
-    <a href="https://twitter.com/ZoranyShalev" target="_blank">Follow me on Twitter</a>
-    <br>
-    <a href="https://www.instagram.com/shalevzorany/" target="_blank">Follow me on Instagram</a>
-    <br>
-    <a href="https://www.tiktok.com/@shalevzoranyapple" target="_blank">Follow me on TikTok</a>
-  </div>
+/* Style the game title */
+.game-title {
+  font-size: 36px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
 
-  <script src="script.js"></script>
-</body>
-</html>
+/* Style the rules container */
+.rules-container {
+  margin-bottom: 30px;
+}
 
+/* Style the rules section */
+.rules {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+/* Style the rules heading */
+.rules h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* Style the rules list */
+.rules ul {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+/* Style the scoring section */
+.scoring {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+}
+
+/* Style the scoring heading */
+.scoring h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* Style the scoring paragraphs */
+.scoring p {
+  margin-bottom: 10px;
+}
+
+/* Style the scoring lists */
+.scoring ul {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+/* Style the game info section */
+.game-info {
+  margin-bottom: 30px;
+}
+
+/* Style the game info paragraphs */
+.game-info p {
+  margin-bottom: 10px;
+}
+
+/* Style the input container */
+.input-container {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+/* Style the guess input field */
+#guessInput {
+  flex: 1;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Style the submit button */
+.submit-button {
+  padding: 8px 16px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+/* Style the hint button */
+.hint-button {
+  padding: 8px 16px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #ccc;
+  color: #333;
+  border: none;
+  border-radius: 4px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+/* Style the admin button */
+.admin-button {
+  padding: 8px 16px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #ff5252;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+/* Style the game table */
+.game-table {
+  margin-bottom: 30px;
+}
+
+/* Style the game table heading */
+.game-table h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Style the guess table */
+#guessTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Style the guess table header */
+#guessTable thead th {
+  font-weight: bold;
+  text-align: left;
+  padding: 8px;
+  border-bottom: 2px solid #333;
+}
+
+/* Style the guess table body */
+#guessTableBody td {
+  padding: 8px;
+  border-bottom: 1px solid #ccc;
+}
+
+/* Style the footer */
+.footer {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 20px;
+}
+
+/* Style the footer links */
+.footer a {
+  color: #333;
+  text-decoration: none;
+  margin-right: 10px;
+  background-color: yellow; /* Add a background color to the links */
+  padding: 2px 4px; /* Adjust padding as needed */
+  border-radius: 4px; /* Add rounded corners to the links */
+}
+
+/* Style the footer links on hover */
+.footer a:hover {
+  text-decoration: underline;
+  background-color: orange; /* Change the background color on hover */
+  color: #fff; /* Change the text color on hover */
+}
