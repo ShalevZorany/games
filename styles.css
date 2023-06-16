@@ -193,14 +193,41 @@ body {
   color: #333;
   text-decoration: none;
   margin-right: 10px;
-  background-color: yellow; /* Add a background color to the links */
-  padding: 2px 4px; /* Adjust padding as needed */
-  border-radius: 4px; /* Add rounded corners to the links */
+  background-color: yellow;
+  padding: 2px 4px;
+  border-radius: 4px;
 }
 
 /* Style the footer links on hover */
 .footer a:hover {
   text-decoration: underline;
-  background-color: orange; /* Change the background color on hover */
-  color: #fff; /* Change the text color on hover */
+  background-color: orange;
+  color: #fff;
+}
+
+/* Responsive styles for mobile devices */
+@media (max-width: 600px) {
+  .game-container {
+    padding: 20px;
+  }
+
+  .game-title {
+    font-size: 24px;
+  }
+
+  .rules {
+    padding: 10px;
+  }
+
+  .scoring {
+    padding: 10px;
+  }
+
+  .input-container {
+    flex-direction: column;
+  }
+
+  #guessInput {
+    margin-top: 10px;
+  }
 }
