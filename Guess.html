@@ -3,15 +3,8 @@
 <head>
   <title>Advanced Number Guessing Game</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
   <link rel="stylesheet" href="styles.css">
-  <script async src="https://www.googletagmanager.com/gtag/js?id=378720862"></script>
-  <script>
-     window.dataLayer = window.dataLayer || [];
-     function gtag(){dataLayer.push(arguments);}
-     gtag('js', new Date());
-
-     gtag('config', '378720862');
-  </script>
 </head>
 <body>
   <div class="game-container">
@@ -21,7 +14,7 @@
         <h2>Rules</h2>
         <ul>
           <li>Guess the correct number within the given number of digits.</li>
-          <li>Each digit must be chosen from 1-9 (0 is not allowed).</li>
+          <li>Each digit must be chosen from 1-9 (0 is not allowed).</li> <!-- Updated rule -->
           <li>A correct digit in the correct place gets a "Correct Place" point.</li>
           <li>A correct digit in the wrong place gets a "Correct Digits" point.</li>
           <li>An incorrect digit gets an "Incorrect Digits" point.</li>
