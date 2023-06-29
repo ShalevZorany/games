@@ -71,10 +71,11 @@ function checkGuess() {
   var guess = guessInput.value.trim();
 
   // Validate the input
-  if (guess.length !== digits || guess.includes('0') || !/^[1-9]\d*$/.test(guess) || guessedNumbers.has(Number(guess))) {
-    alert('Please enter a valid ' + digits + '-digit number (excluding leading zeros) without repeating digits.');
-    return;
-  }
+if (guess.length !== digits || guess.includes('0') || !/^[1-9]\d*$/.test(guess) || guessedNumbers.has(Number(guess))) {
+  alert('Please enter a valid ' + digits + '-digit number (excluding leading zeros) without repeating digits.');
+  return;
+}
+
 
   // Count the number of correct place, correct digits, and incorrect digits
   var correctPlace = 0;
