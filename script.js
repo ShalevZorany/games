@@ -77,6 +77,7 @@ if (guess.length !== digits || guess.includes('0') || !/^[1-9]\d*$/.test(guess) 
 }
 
 
+
   // Count the number of correct place, correct digits, and incorrect digits
   var correctPlace = 0;
   var correctDigits = 0;
