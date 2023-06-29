@@ -133,4 +133,3 @@ function adminButtonClicked() {
 
 // Start the first game
 startGame();
-
