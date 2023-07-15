@@ -52,7 +52,7 @@ function makeGuess() {
   }
 
   if (!validateGuess(guess)) {
-    alert("Please ensure that each digit in your guess is unique and not zero.");
+    alert(`Please ensure that each digit in your ${guessDigits}-digit guess is unique and not zero.`);
     return;
   }
 
@@ -120,42 +120,47 @@ function endGame() {
   guessButton.disabled = true;
   hintButton.disabled = true;
   adminButton.disabled = true;
-  alert(`Congratulations! You guessed the number in ${guessCount} attempts.`);
 
-  if (guessDigits === 3) {
-    // Completed step 1
-    alert("You have completed step 1. Proceeding to step 2.");
-    // Perform any necessary actions specific to step 1 completion
+  // Move the focus back to the guess input field
+  guessInputElement.focus();
 
-    // Update variables for step 2
-    level++;
-    secretNumberDigits++;
-    guessDigits = secretNumberDigits;
-    secretNumber = generateSecretNumber(secretNumberDigits);
-    guessCount = 1; // Reset the guess count
+  setTimeout(() => {
+    alert(`Congratulations! You guessed the number in ${guessCount} attempts.`);
 
-    // Update DOM elements for step 2
-    levelElement.textContent = level;
-    digitsElement.textContent = secretNumberDigits;
-    guessDigitsElement.textContent = guessDigits;
-    guessTableBody.innerHTML = ""; // Clear previous guesses from the table
+    if (guessDigits === 3) {
+      // Completed step 1
+      alert("You have completed step 1. Proceeding to step 2.");
+      // Perform any necessary actions specific to step 1 completion
 
-    guessInputElement.value = ""; // Reset the guess input
-    guessInputElement.focus(); // Set focus to the guess input for the next guess
+      // Update variables for step 2
+      level++;
+      secretNumberDigits++;
+      guessDigits = secretNumberDigits;
+      secretNumber = generateSecretNumber(secretNumberDigits);
+      guessCount = 1; // Reset the guess count
 
-    // Enable game controls for step 2
-    guessInputElement.disabled = false;
-    guessButton.disabled = false;
-    hintButton.disabled = false;
-    adminButton.disabled = false;
+      // Update DOM elements for step 2
+      levelElement.textContent = level;
+      digitsElement.textContent = secretNumberDigits;
+      guessDigitsElement.textContent = guessDigits;
+      guessTableBody.innerHTML = ""; // Clear previous guesses from the table
 
-    // Update the score based on the current level and guess count
-    updateScore();
-  } else {
-    // Completed step 2
-    alert("You have completed step 2. Game over.");
-    // Perform any necessary actions specific to step 2 completion
-  }
+      guessInputElement.value = ""; // Reset the guess input
+      guessInputElement.disabled = false; // Enable the guess input field for step 2
+      guessInputElement.focus(); // Set focus to the guess input for the next guess
+
+      guessButton.disabled = false;
+      hintButton.disabled = false;
+      adminButton.disabled = false;
+
+      // Update the score based on the current level and guess count
+      updateScore();
+    } else {
+      // Completed step 2
+      alert("You have completed step 2. Game over.");
+      // Perform any necessary actions specific to step 2 completion
+    }
+  }, 0);
 }
 
 // Update the score based on the current level and guess count
