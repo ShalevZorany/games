@@ -126,10 +126,15 @@ function endGame() {
   secretNumberDigits++;
   guessDigits = secretNumberDigits;
   secretNumber = generateSecretNumber(secretNumberDigits);
+  guessCount = 1; // Reset the guess count
 
   levelElement.textContent = level;
   digitsElement.textContent = secretNumberDigits;
   guessDigitsElement.textContent = guessDigits;
+  guessTableBody.innerHTML = ""; // Clear previous guesses from the table
+
+  guessInputElement.value = ""; // Reset the guess input
+  guessInputElement.focus(); // Set focus to the guess input for the next guess
 }
 
 // Update the score based on the current level and guess count
