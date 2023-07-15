@@ -81,7 +81,7 @@ function processGuess(guess) {
 
   // Update game information
   guessDigits++;
-  score += 10; // Increase score by 10 for each guess
+  score += 10; // Increase score for each guess
   totalScore += score; // Update the total score
   document.getElementById('score').textContent = score;
   document.getElementById('guessDigits').textContent = guessDigits;
@@ -117,9 +117,22 @@ function processGuess(guess) {
       // Game Over
       gameOver = true;
       alert('Congratulations! You have completed all the steps.\nTotal Score: ' + totalScore + '\nGame Over');
-      // You can add any additional logic or actions for the end of the game here
+      showResult(totalScore);
+      showNewGameButton();
     }
   }
+}
+
+// Function to show the result
+function showResult(score) {
+  const resultContainer = document.getElementById('result');
+  resultContainer.textContent = 'Your Result: ' + score + ' points';
+}
+
+// Function to show the "New Game" button
+function showNewGameButton() {
+  const newGameButton = document.getElementById('newGameButton');
+  newGameButton.style.display = 'inline-block';
 }
 
 // Function to provide a hint by revealing the first digit of the secret number
@@ -144,10 +157,9 @@ function revealSecretNumber() {
   adminUsed = true;
   score += 100; // Increase score by 100 for using the admin button
   const currentScore = score; // Store the current score
-  score = 0; // Reset the score to 0 for the current step
   totalScore -= currentScore; // Deduct the current score from the total score
 
-  alert('Admin: The secret number is ' + secretNumber + '\nScore: 0');
+  alert('Admin: The secret number is ' + secretNumber + '\nScore: ' + currentScore);
   document.getElementById('score').textContent = score;
 
   // Update guess table scores to 0
@@ -177,6 +189,8 @@ function startNewGame() {
   document.getElementById('digits').textContent = secretNumberDigits;
   document.getElementById('guessDigits').textContent = guessDigits;
   document.getElementById('guessTableBody').innerHTML = '';
+  document.getElementById('result').textContent = '';
+  document.getElementById('newGameButton').style.display = 'none';
 }
 
 // Event listener for the guess button
