@@ -81,7 +81,7 @@ function processGuess(guess) {
 
   // Update game information
   guessDigits++;
-  score += 10; // Increase score for each guess
+  score += 10; // Increase score by 10 for each guess
   totalScore += score; // Update the total score
   document.getElementById('score').textContent = score;
   document.getElementById('guessDigits').textContent = guessDigits;
@@ -129,8 +129,10 @@ function getHint() {
   }
 
   hintUsed = true;
+  score += 50; // Increase score by 50 for using a hint
   const hintDigit = secretNumber[0];
   alert('Hint: The first digit of the secret number is ' + hintDigit);
+  document.getElementById('score').textContent = score;
 }
 
 // Function to reveal the secret number (admin functionality)
@@ -140,8 +142,10 @@ function revealSecretNumber() {
   }
 
   adminUsed = true;
+  score += 100; // Increase score by 100 for using the admin button
+  const currentScore = score; // Store the current score
   score = 0; // Reset the score to 0 for the current step
-  totalScore -= score; // Deduct the current score from the total score
+  totalScore -= currentScore; // Deduct the current score from the total score
 
   alert('Admin: The secret number is ' + secretNumber + '\nScore: 0');
   document.getElementById('score').textContent = score;
