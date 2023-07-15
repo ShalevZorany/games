@@ -2,8 +2,6 @@ body {
   background-color: #f5f5f5;
   font-family: 'Roboto', sans-serif;
   color: #333;
-  margin: 0;
-  padding: 0;
 }
 
 .game-container {
@@ -20,128 +18,101 @@ body {
   font-weight: bold;
   color: #3c4146;
   text-align: center;
-  margin-bottom: 20px;
+  margin-top: 0;
 }
 
 .rules-container {
-  background-color: #f9f9f9;
+  background-color: #fff;
   padding: 20px;
   border-radius: 8px;
   margin-bottom: 30px;
 }
 
-.rules h2 {
-  font-size: 24px;
-  font-weight: bold;
-  color: #3c4146;
-  margin-bottom: 10px;
-}
-
-.rules ul {
-  list-style-type: disc;
-  padding-left: 20px;
-}
-
-.rules li {
-  margin-bottom: 8px;
+.rules {
+  font-size: 18px;
+  line-height: 1.5;
+  color: #333;
 }
 
 .game-info {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  text-align: center;
   margin-bottom: 20px;
 }
 
 .game-info p {
-  font-size: 16px;
-  font-weight: bold;
-  color: #3c4146;
+  margin: 5px;
 }
 
 .input-container {
-  display: flex;
-  align-items: center;
+  text-align: center;
   margin-bottom: 20px;
 }
 
-#guessInput {
-  flex-grow: 1;
-  padding: 12px;
-  margin-right: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-
-.submit-button,
-.hint-button,
-.admin-button {
+#guessInput, .submit-button, .hint-button, .admin-button {
   padding: 12px 20px;
   margin: 8px 0;
   border: none;
   border-radius: 4px;
-  color: #fff;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  box-sizing: border-box;
 }
 
 .submit-button {
   background-color: #4caf50;
+  color: white;
+  cursor: pointer;
 }
 
 .hint-button {
   background-color: #2196f3;
+  color: white;
+  cursor: pointer;
 }
 
 .admin-button {
   background-color: #f44336;
-}
-
-.submit-button:hover,
-.hint-button:hover,
-.admin-button:hover {
-  background-color: #45a049;
+  color: white;
+  cursor: pointer;
 }
 
 .game-table {
-  margin-bottom: 20px;
-}
-
-.game-table h2 {
-  font-size: 20px;
-  font-weight: bold;
-  color: #3c4146;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
 }
 
 #guessTable {
-  width: 100%;
+  font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
-  border: 1px solid #ddd;
+  width: 100%;
 }
 
-#guessTable th,
-#guessTable td {
+#guessTable td, #guessTable th {
+  border: 1px solid #ddd;
   padding: 8px;
-  text-align: center;
-  border-bottom: 1px solid #ddd;
+}
+
+#guessTable tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#guessTable tr:hover {
+  background-color: #ddd;
 }
 
 #guessTable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
   background-color: #4caf50;
-  color: #fff;
+  color: white;
 }
 
 .footer {
   text-align: center;
   font-size: 14px;
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 .footer p {
   font-weight: bold;
-  color: #3c4146;
 }
 
 .footer a {
@@ -151,4 +122,44 @@ body {
 
 .footer a:hover {
   text-decoration: underline;
+}
+
+@media screen and (max-width: 480px) {
+  .game-container {
+    padding: 20px;
+  }
+
+  .game-title {
+    font-size: 28px;
+  }
+
+  .rules-container {
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+
+  .rules {
+    font-size: 16px;
+  }
+
+  .game-info p {
+    font-size: 14px;
+  }
+
+  #guessInput, .submit-button, .hint-button, .admin-button {
+    padding: 10px 15px;
+  }
+
+  .game-table {
+    margin-bottom: 20px;
+  }
+
+  #guessTable td, #guessTable th {
+    padding: 6px;
+  }
+
+  .footer {
+    font-size: 12px;
+    margin-top: 20px;
+  }
 }
