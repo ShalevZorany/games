@@ -1,6 +1,7 @@
 // Initialize game variables
 let step = 1;
 let score = 0;
+let totalScore = 0; // New variable to track the cumulative score
 let secretNumberDigits = 3;
 let guessDigits = 0;
 let secretNumber = generateSecretNumber(secretNumberDigits);
@@ -76,6 +77,7 @@ function processGuess(guess) {
   // Update game information
   guessDigits++;
   score += 10; // Increase score for each guess
+  totalScore += score; // Update the total score
   document.getElementById('score').textContent = score;
   document.getElementById('guessDigits').textContent = guessDigits;
 
@@ -108,7 +110,7 @@ function processGuess(guess) {
       guessTableBody.innerHTML = '';
     } else {
       // Game Over
-      alert('Congratulations! You have completed all the steps. Final Score: ' + score);
+      alert('Congratulations! You have completed all the steps. Final Score: ' + totalScore);
       // You can add any additional logic or actions for the end of the game here
     }
   }
@@ -134,9 +136,16 @@ function revealSecretNumber() {
   }
 
   adminUsed = true;
-  score = 0;
+  score = 0; // Reset the score to 0 for the current step
   alert('Admin: The secret number is ' + secretNumber + '\nScore: 0');
   document.getElementById('score').textContent = score;
+
+  // Update guess table scores to 0
+  const guessTableRows = document.querySelectorAll('#guessTableBody tr');
+  guessTableRows.forEach((row) => {
+    const scoreCell = row.querySelector('td:nth-child(3)');
+    scoreCell.textContent = '0';
+  });
 }
 
 // Event listener for the guess button
