@@ -1,4 +1,4 @@
-body {
+.body {
   background-color: #f5f5f5;
   font-family: 'Roboto', sans-serif;
   color: #333;
@@ -22,7 +22,7 @@ body {
 }
 
 .rules-container {
-  background-color: #fff;
+  background-color: #ffc107;
   padding: 20px;
   border-radius: 8px;
   margin-bottom: 30px;
@@ -32,6 +32,12 @@ body {
   font-size: 18px;
   line-height: 1.5;
   color: #333;
+}
+
+.rules h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #3c4146;
 }
 
 .game-info {
