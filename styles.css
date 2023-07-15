@@ -13,150 +13,135 @@ body {
   background-color: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  box-sizing: border-box;
 }
 
 .game-title {
   font-size: 36px;
   font-weight: bold;
+  color: #3c4146;
   text-align: center;
-  margin-bottom: 30px;
-  background: linear-gradient(to right, #ff0066, #6600ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.rules-container, .scoring {
-  background-color: #ffffff;
-  padding: 20px;
-  border-radius: 8px;
-  margin-bottom: 30px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.rules h2, .scoring h2 {
-  font-size: 24px;
-  font-weight: bold;
-  color: #333;
-  margin-top: 0;
-}
-
-.rules-container .rules {
-  background-color: #ffd700;
-  padding: 20px;
-  border-radius: 8px;
   margin-bottom: 20px;
 }
 
-.rules-container .rules li {
-  font-size: 18px;
+.rules-container {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+}
+
+.rules h2 {
+  font-size: 24px;
   font-weight: bold;
-  color: #333;
+  color: #3c4146;
   margin-bottom: 10px;
 }
 
-.game-info p {
-  margin: 0;
-  color: #777;
+.rules ul {
+  list-style-type: disc;
+  padding-left: 20px;
 }
 
-.game-info span {
+.rules li {
+  margin-bottom: 8px;
+}
+
+.game-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.game-info p {
+  font-size: 16px;
   font-weight: bold;
-  color: #333;
+  color: #3c4146;
 }
 
 .input-container {
   display: flex;
-  flex-direction: column;
+  align-items: center;
   margin-bottom: 20px;
 }
 
 #guessInput {
+  flex-grow: 1;
   padding: 12px;
-  margin-bottom: 10px;
+  margin-right: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
 }
 
-.submit-button, .hint-button, .admin-button {
+.submit-button,
+.hint-button,
+.admin-button {
   padding: 12px 20px;
+  margin: 8px 0;
   border: none;
   border-radius: 4px;
+  color: #fff;
   cursor: pointer;
-  font-weight: bold;
-  text-transform: uppercase;
+  transition: background-color 0.3s ease;
 }
 
 .submit-button {
   background-color: #4caf50;
-  color: white;
 }
 
 .hint-button {
   background-color: #2196f3;
-  color: white;
 }
 
 .admin-button {
   background-color: #f44336;
-  color: white;
+}
+
+.submit-button:hover,
+.hint-button:hover,
+.admin-button:hover {
+  background-color: #45a049;
 }
 
 .game-table {
-  background-color: #ffffff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin-bottom: 30px;
-  overflow-x: auto;
-}
-
-.game-table h2 {
-  font-size: 24px;
-  font-weight: bold;
-  color: #333;
-  margin-top: 0;
   margin-bottom: 20px;
 }
 
+.game-table h2 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #3c4146;
+  margin-bottom: 10px;
+}
+
 #guessTable {
-  font-family: Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
   width: 100%;
-}
-
-#guessTable td, #guessTable th {
+  border-collapse: collapse;
   border: 1px solid #ddd;
+}
+
+#guessTable th,
+#guessTable td {
   padding: 8px;
-}
-
-#guessTable tr:nth-child(even){
-  background-color: #f2f2f2;
-}
-
-#guessTable tr:hover {
-  background-color: #ddd;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
 }
 
 #guessTable th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
   background-color: #4caf50;
-  color: white;
+  color: #fff;
 }
 
 .footer {
   text-align: center;
   font-size: 14px;
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 .footer p {
   font-weight: bold;
-  color: #333;
-  margin-bottom: 10px;
+  color: #3c4146;
 }
 
 .footer a {
@@ -166,76 +151,4 @@ body {
 
 .footer a:hover {
   text-decoration: underline;
-}
-
-/* Responsive Design */
-@media only screen and (max-width: 600px) {
-  .game-container {
-    padding: 20px;
-  }
-  
-  .game-title {
-    font-size: 28px;
-    margin-bottom: 20px;
-  }
-  
-  .rules-container, .scoring {
-    padding: 15px;
-    margin-bottom: 20px;
-  }
-  
-  .rules h2, .scoring h2 {
-    font-size: 22px;
-  }
-  
-  .rules-container .rules {
-    padding: 15px;
-    margin-bottom: 15px;
-  }
-  
-  .rules-container .rules li {
-    font-size: 16px;
-    margin-bottom: 8px;
-  }
-  
-  .input-container {
-    margin-bottom: 15px;
-  }
-  
-  #guessInput {
-    margin-bottom: 8px;
-  }
-  
-  .game-table {
-    padding: 15px;
-    margin-bottom: 20px;
-  }
-  
-  .game-table h2 {
-    font-size: 22px;
-    margin-bottom: 15px;
-  }
-  
-  .footer {
-    margin-top: 20px;
-  }
-}
-
-/* Safari Fix */
-@media not all and (min-resolution:.001dpcm) { @supports (-webkit-appearance:none) {
-  /* Safari Only CSS Rules Here */
-  body {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .game-container {
-    flex: 1;
-  }
-}}
-
-/* Mobile Zoom Prevention */
-html, body {
-  touch-action: manipulation;
 }
