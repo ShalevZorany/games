@@ -64,14 +64,14 @@ body {
 
 .input-container {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: stretch;
   margin-bottom: 20px;
 }
 
 #guessInput {
-  flex: 1;
   padding: 12px;
-  margin-right: 10px;
+  margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
@@ -163,4 +163,57 @@ body {
 
 .footer a:hover {
   text-decoration: underline;
+}
+
+/* Responsive Design */
+@media only screen and (max-width: 600px) {
+  .game-container {
+    padding: 20px;
+  }
+  
+  .game-title {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+  
+  .rules-container, .scoring {
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .rules h2, .scoring h2 {
+    font-size: 22px;
+  }
+  
+  .rules-container .rules {
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+  
+  .rules-container .rules li {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+  
+  .input-container {
+    margin-bottom: 15px;
+  }
+  
+  #guessInput {
+    margin-bottom: 8px;
+  }
+  
+  .game-table {
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .game-table h2 {
+    font-size: 22px;
+    margin-bottom: 15px;
+  }
+  
+  .footer {
+    margin-top: 20px;
+  }
 }
