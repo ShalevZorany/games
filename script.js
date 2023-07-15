@@ -5,6 +5,8 @@ let secretNumberDigits = 3;
 let guessDigits = 0;
 let secretNumber = generateSecretNumber(secretNumberDigits);
 let guesses = [];
+let hintUsed = false;
+let adminUsed = false;
 
 // Function to generate a random secret number with the specified number of digits
 function generateSecretNumber(digits) {
@@ -97,6 +99,8 @@ function processGuess(guess) {
       guessDigits = 0;
       secretNumber = generateSecretNumber(secretNumberDigits);
       guesses = [];
+      hintUsed = false;
+      adminUsed = false;
       alert('Congratulations! You have guessed all the digits correctly. Moving on to the next step.');
       document.getElementById('step').textContent = step;
       document.getElementById('digits').textContent = secretNumberDigits;
@@ -110,6 +114,31 @@ function processGuess(guess) {
   }
 }
 
+// Function to provide a hint by revealing the first digit of the secret number
+function getHint() {
+  if (hintUsed) {
+    alert('Hint already used in this step!');
+    return;
+  }
+
+  hintUsed = true;
+  const hintDigit = secretNumber[0];
+  alert('Hint: The first digit of the secret number is ' + hintDigit);
+}
+
+// Function to reveal the secret number (admin functionality)
+function revealSecretNumber() {
+  if (adminUsed) {
+    alert('Admin functionality already used in this step!');
+    return;
+  }
+
+  adminUsed = true;
+  score = 0;
+  alert('Admin: The secret number is ' + secretNumber + '\nScore: 0');
+  document.getElementById('score').textContent = score;
+}
+
 // Event listener for the guess button
 document.getElementById('guessButton').addEventListener('click', function() {
   const guessInput = document.getElementById('guessInput');
@@ -118,12 +147,8 @@ document.getElementById('guessButton').addEventListener('click', function() {
   processGuess(guess);
 });
 
-// Event listener for the hint button (not implemented for this version)
-document.getElementById('hintButton').addEventListener('click', function() {
-  alert('Hint functionality is not implemented in this version.');
-});
+// Event listener for the hint button
+document.getElementById('hintButton').addEventListener('click', getHint);
 
-// Event listener for the admin button (for demonstration purposes only)
-document.getElementById('adminButton').addEventListener('click', function() {
-  alert('Admin functionality is not implemented in this version.');
-});
+// Event listener for the admin button
+document.getElementById('adminButton').addEventListener('click', revealSecretNumber);
