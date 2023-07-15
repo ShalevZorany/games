@@ -160,6 +160,8 @@ function endGame() {
       alert("You have completed step 2. Game over.");
       // Perform any necessary actions specific to step 2 completion
     }
+
+    guessDigits = secretNumberDigits; // Update guessDigits for step 2
   }, 0);
 }
 
