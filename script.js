@@ -60,7 +60,7 @@ function makeGuess() {
 
   displayGuessResult(guess, result.correctPlace, result.correctDigits, result.incorrectDigits);
 
-  if (result.correctPlace === guessDigits) {
+  if (result.correctPlace === secretNumberDigits) {
     endGame();
   } else {
     guessCount++;
