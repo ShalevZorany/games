@@ -15,20 +15,19 @@
     <div class="rules-container">
 <div class="rules">
   <h2>Game Description:</h2>
-  <p>Welcome to Guess the Number! In this game, your objective is to guess the secret number. The secret number consists of a certain number of digits, and the number of digits will increase as you progress through different levels.</p>
-  <p>The goal of the game is to guess the secret number with as few points as possible. Each incorrect guess will result in an increase in your score, so try to make accurate guesses to minimize your score.</p>
+  <p>Welcome to Guess the Number! In this game, your goal is to find out the secret number at each stage and achieve the lowest score possible.</p>
   <p>The game rules are as follows:</p>
   <ul>
-    <li>Enter a guess in the input field provided. The guess should be a numeric value.</li>
-    <li>The score will decrease over time, so make your guesses quickly to earn higher scores.</li>
-    <li>To assist you in guessing the number, you can use the 'Get Hint' button. However, using a hint will deduct some points from your score.</li>
-    <li>Ensure that no digit repeats in your guess.</li>
-    <li>Use the 'Admin' button to reveal the secret number and earn 100 points.</li>
+    <li>Enter a guess in the input field provided. The guess should be a numeric value between 1 and 9 (inclusive).</li>
+    <li>Each guess earns you 10 points, regardless of whether it is correct or not.</li>
+    <li>Avoid guessing the number 0.</li>
+    <li>Using the 'Get Hint' button gives you 50 points and provides a hint to help you in guessing the number.</li>
+    <li>Using the 'Admin' button reveals the secret number and gives you 100 points.</li>
   </ul>
   <p>Explanation of the Score:</p>
   <ul>
-    <li>For each guess you make, regardless of whether it is correct or not, you earn 10 points. The score increases with each guess.</li>
-    <li>If you use the 'Get Hint' button, it will deduct a certain number of points from your score. The exact deduction may vary depending on the game implementation.</li>
+    <li>For each guess you make, whether correct or not, your score increases by 10 points.</li>
+    <li>Using the 'Get Hint' button gives you 50 points.</li>
     <li>Using the 'Admin' button reveals the secret number and gives you 100 points.</li>
     <li>The final score is calculated based on the total points earned throughout the game. Aim to achieve the lowest score possible.</li>
   </ul>
