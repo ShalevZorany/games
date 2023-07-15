@@ -40,7 +40,7 @@ body {
 }
 
 .game-info p {
-  margin: 5px;
+  margin: 10px 0;
 }
 
 .input-container {
@@ -48,12 +48,17 @@ body {
   margin-bottom: 20px;
 }
 
-#guessInput, .submit-button, .hint-button, .admin-button {
+#guessInput,
+.submit-button,
+.hint-button,
+.admin-button {
   padding: 12px 20px;
   margin: 8px 0;
   border: none;
   border-radius: 4px;
   box-sizing: border-box;
+  width: 100%;
+  max-width: 250px;
 }
 
 .submit-button {
@@ -84,7 +89,8 @@ body {
   width: 100%;
 }
 
-#guessTable td, #guessTable th {
+#guessTable td,
+#guessTable th {
   border: 1px solid #ddd;
   padding: 8px;
 }
@@ -143,10 +149,13 @@ body {
   }
 
   .game-info p {
-    font-size: 14px;
+    margin: 15px 0;
   }
 
-  #guessInput, .submit-button, .hint-button, .admin-button {
+  #guessInput,
+  .submit-button,
+  .hint-button,
+  .admin-button {
     padding: 10px 15px;
   }
 
@@ -154,7 +163,8 @@ body {
     margin-bottom: 20px;
   }
 
-  #guessTable td, #guessTable th {
+  #guessTable td,
+  #guessTable th {
     padding: 6px;
   }
 
