@@ -60,15 +60,16 @@ function makeGuess() {
 
   displayGuessResult(guess, result.correctPlace, result.correctDigits, result.incorrectDigits);
 
-  if (result.correctPlace === secretNumberDigits) {
+  if (result.correctPlace === guessDigits) {
     endGame();
-  } else {
+  } else if (level > 1) { // Check if the current level is greater than 1
     guessCount++;
     updateScore();
     guessInputElement.value = "";
     guessInputElement.focus();
   }
 }
+
 
 // Validate the guess to ensure that each digit is unique and not zero
 function validateGuess(guess) {
