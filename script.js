@@ -124,7 +124,12 @@ function endGame() {
 
   level++;
   secretNumberDigits++;
-  guessDigits = secretNumberDigits;
+
+  // Update guessDigits for level 2
+  if (level === 2) {
+    guessDigits = secretNumberDigits;
+  }
+
   secretNumber = generateSecretNumber(secretNumberDigits);
 
   levelElement.textContent = level;
@@ -164,7 +169,7 @@ function getHint() {
   const hintIndex = Math.floor(Math.random() * secretNumberDigits);
   const hintDigit = secretNumber.charAt(hintIndex);
 
-  alert(`Hint: The digit at index ${hintIndex} is ${hintDigit}.`);
+  alert(`Hint: The first digit is ${hintDigit}.`);
 
   score -= 5;
   scoreElement.textContent = score;
