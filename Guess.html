@@ -1,63 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <title>Advanced Number Guessing Game</title>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+  <title>Guess the Number</title>
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
   <div class="game-container">
-    <h1 class="game-title">Advanced Number Guessing Game</h1>
+    <h1 class="game-title">Guess the Number</h1>
+    
     <div class="rules-container">
       <div class="rules">
-        <h2>Rules</h2>
+        <h2>Game Rules</h2>
         <ul>
-          <li>Guess the correct number within the given number of digits.</li>
-          <li>Each digit must be chosen from 1-9 (0 is not allowed).</li> <!-- Updated rule -->
-          <li>A correct digit in the correct place gets a "Correct Place" point.</li>
-          <li>A correct digit in the wrong place gets a "Correct Digits" point.</li>
-          <li>An incorrect digit gets an "Incorrect Digits" point.</li>
-          <li>Score is calculated based on time, attempts, and use of hints.</li>
-          <li>Each level has a different number of digits to guess.</li>
-          <li>Use the "Hint" button to get a clue about the first digit.</li>
+          <li>Guess the secret number of a certain number of digits.</li>
+          <li>Number of digits increases with level.</li>
+          <li>Score decreases over time, so guess quickly!</li>
+          <li>Get a hint for the cost of some points.</li>
+          <li>No digit repeats in the secret number.</li>
+          <li>Use the 'Admin' button only if you are the game admin.</li>
         </ul>
       </div>
     </div>
-    <div class="scoring">
-      <h2>Scoring</h2>
-      <p>The score is calculated based on the following criteria:</p>
-      <ul>
-        <li>Time taken: Completing the game faster earns more points.</li>
-        <li>Number of attempts: Fewer attempts earn more points.</li>
-        <li>Use of hints: Using hints deducts points.</li>
-      </ul>
-      <p>The final score is determined by:</p>
-      <ul>
-        <li>Time Score: Starts with an initial score of 5,000. Deducts 10 points for every second elapsed.</li>
-        <li>Attempts Score: Starts with an initial score of 5,000. Deducts 50 points for each attempt.</li>
-        <li>Hint Penalty: Deducts 500 points if a hint is used.</li>
-      </ul>
-      <p>The score is capped at a minimum value of 0 to prevent negative scores.</p>
-    </div>
+    
     <div class="game-info">
-      <p>Level: <span id="level"></span></p>
-      <p>Score: <span id="score"></span></p>
-      <p>Number of Digits: <span id="digits"></span></p>
-      <p>Guess a <span id="guessDigits"></span>-digit number:</p>
-      <div class="input-container">
-        <input type="text" id="guessInput" disabled>
-        <button onclick="checkGuess()" class="submit-button">Submit</button>
-        <button onclick="giveHint()" class="hint-button">Hint</button>
-        <button onclick="adminButtonClicked()" class="admin-button">Admin</button>
-      </div>
+      <p>Level: <span id="level">1</span></p>
+      <p>Score: <span id="score">0</span></p>
+      <p>Secret number digits: <span id="digits">3</span></p>
+      <p>Your guess digits: <span id="guessDigits">0</span></p>
     </div>
+    
+    <div class="input-container">
+      <input id="guessInput" type="text" placeholder="Enter your guess">
+      <button id="guessButton" class="submit-button">Guess</button>
+      <button id="hintButton" class="hint-button">Get Hint</button>
+      <button id="adminButton" class="admin-button">Admin</button>
+    </div>
+    
     <div class="game-table">
-      <h2>Guessing Table</h2>
+      <h2>Previous Guesses</h2>
       <table id="guessTable">
         <thead>
           <tr>
-            <th>Attempt</th>
+            <th>#</th>
             <th>Guess</th>
             <th>Correct Place</th>
             <th>Correct Digits</th>
@@ -68,18 +56,28 @@
         </tbody>
       </table>
     </div>
+    
     <div class="footer">
       <p>Created by Shalev Zorany</p>
-      <a href="https://www.facebook.com/shalev.zorany/" target="_blank">Visit my Facebook page</a>
-      <br>
-      <a href="https://twitter.com/ZoranyShalev" target="_blank">Follow me on Twitter</a>
-      <br>
-      <a href="https://www.instagram.com/shalevzorany/" target="_blank">Follow me on Instagram</a>
-      <br>
-      <a href="https://www.tiktok.com/@shalevzoranyapple" target="_blank">Follow me on TikTok</a>
+      <div>
+        <a href="https://www.facebook.com/shalev.zorany/" target="_blank">Visit my Facebook page</a>
+      </div>
+      <div>
+        <a href="https://twitter.com/ZoranyShalev" target="_blank">Follow me on Twitter</a>
+      </div>
+      <div>
+        <a href="https://www.instagram.com/shalevzorany/" target="_blank">Follow me on Instagram</a>
+      </div>
+      <div>
+        <a href="https://www.tiktok.com/@shalevzoranyapple" target="_blank">Follow me on TikTok</a>
+      </div>
+      <div>
+        <a href="https://www.threads.net/@shalevzorany" target="_blank">Follow me on Threads</a>
+      </div>
     </div>
   </div>
+  
   <script src="script.js"></script>
-  <script src="admin.js"></script>
 </body>
+
 </html>
