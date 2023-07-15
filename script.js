@@ -8,6 +8,7 @@ let secretNumber = generateSecretNumber(secretNumberDigits);
 let guesses = [];
 let hintUsed = false;
 let adminUsed = false;
+let gameOver = false;
 
 // Function to generate a random secret number with the specified number of digits
 function generateSecretNumber(digits) {
@@ -45,6 +46,10 @@ function validateGuess(guess) {
 
 // Function to process the user's guess
 function processGuess(guess) {
+  if (gameOver) {
+    return;
+  }
+
   if (!validateGuess(guess)) {
     alert('Invalid guess! Make sure you enter a ' + secretNumberDigits + '-digit number with no repeating digits, and without the digit 0.');
     return;
@@ -110,6 +115,7 @@ function processGuess(guess) {
       guessTableBody.innerHTML = '';
     } else {
       // Game Over
+      gameOver = true;
       alert('Congratulations! You have completed all the steps.\nFinal Score: ' + totalScore + '\nGame Over');
       // You can add any additional logic or actions for the end of the game here
     }
@@ -118,8 +124,7 @@ function processGuess(guess) {
 
 // Function to provide a hint by revealing the first digit of the secret number
 function getHint() {
-  if (hintUsed) {
-    alert('Hint already used in this step!');
+  if (hintUsed || gameOver) {
     return;
   }
 
@@ -130,13 +135,14 @@ function getHint() {
 
 // Function to reveal the secret number (admin functionality)
 function revealSecretNumber() {
-  if (adminUsed) {
-    alert('Admin functionality already used in this step!');
+  if (adminUsed || gameOver) {
     return;
   }
 
   adminUsed = true;
   score = 0; // Reset the score to 0 for the current step
+  totalScore -= score; // Deduct the current score from the total score
+
   alert('Admin: The secret number is ' + secretNumber + '\nScore: 0');
   document.getElementById('score').textContent = score;
 
@@ -146,6 +152,27 @@ function revealSecretNumber() {
     const scoreCell = row.querySelector('td:nth-child(3)');
     scoreCell.textContent = '0';
   });
+}
+
+// Function to start a new game
+function startNewGame() {
+  step = 1;
+  score = 0;
+  totalScore = 0;
+  secretNumberDigits = 3;
+  guessDigits = 0;
+  secretNumber = generateSecretNumber(secretNumberDigits);
+  guesses = [];
+  hintUsed = false;
+  adminUsed = false;
+  gameOver = false;
+
+  // Reset the HTML elements
+  document.getElementById('step').textContent = step;
+  document.getElementById('score').textContent = score;
+  document.getElementById('digits').textContent = secretNumberDigits;
+  document.getElementById('guessDigits').textContent = guessDigits;
+  document.getElementById('guessTableBody').innerHTML = '';
 }
 
 // Event listener for the guess button
@@ -161,3 +188,6 @@ document.getElementById('hintButton').addEventListener('click', getHint);
 
 // Event listener for the admin button
 document.getElementById('adminButton').addEventListener('click', revealSecretNumber);
+
+// Event listener for the new game button
+document.getElementById('newGameButton').addEventListener('click', startNewGame);
