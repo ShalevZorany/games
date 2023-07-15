@@ -130,6 +130,22 @@ function endGame() {
   levelElement.textContent = level;
   digitsElement.textContent = secretNumberDigits;
   guessDigitsElement.textContent = guessDigits;
+
+  // Clear previous guesses
+  while (guessTableBody.firstChild) {
+    guessTableBody.removeChild(guessTableBody.firstChild);
+  }
+
+  // Reset guess count
+  guessCount = 1;
+
+  // Enable input and buttons for new guess
+  guessInputElement.disabled = false;
+  guessButton.disabled = false;
+  hintButton.disabled = false;
+  adminButton.disabled = false;
+  guessInputElement.value = "";
+  guessInputElement.focus();
 }
 
 // Update the score based on the current level and guess count
