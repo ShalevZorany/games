@@ -173,3 +173,47 @@ body {
     margin-top: 20px;
   }
 }
+
+@media screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) {
+  .game-container {
+    padding: 30px 20px;
+  }
+
+  .game-title {
+    font-size: 32px;
+  }
+
+  .rules-container {
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+
+  .rules {
+    font-size: 14px;
+  }
+
+  .game-info p {
+    margin: 15px 0;
+  }
+
+  #guessInput,
+  .submit-button,
+  .hint-button,
+  .admin-button {
+    padding: 8px 12px;
+  }
+
+  .game-table {
+    margin-bottom: 20px;
+  }
+
+  #guessTable td,
+  #guessTable th {
+    padding: 4px;
+  }
+
+  .footer {
+    font-size: 10px;
+    margin-top: 20px;
+  }
+}
