@@ -153,10 +153,10 @@ document.getElementById('hintButton').addEventListener('click', function() {
 
 // Event listener for the admin button
 document.getElementById('adminButton').addEventListener('click', function() {
-  revealSecretNumber();
-  if (step === 5) {
-    document.getElementById('adminButton').disabled = true;
-  }
+  const secretNumber = generateSecretNumber();
+  showResultMessage(`The secret number is ${secretNumber}. Your score has increased by 100 points.`, 'green');
+  score += 100;
+  document.getElementById('score').textContent = score;
 });
 
 // Event listener for the new game button
