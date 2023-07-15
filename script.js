@@ -14,13 +14,11 @@ const digitsElement = document.getElementById("digits");
 const guessDigitsElement = document.getElementById("guessDigits");
 const guessInputElement = document.getElementById("guessInput");
 const guessButton = document.getElementById("guessButton");
-const hintButton = document.getElementById("hintButton");
 const adminButton = document.getElementById("adminButton");
 const guessTableBody = document.getElementById("guessTableBody");
 
 // Event listeners
 guessButton.addEventListener("click", makeGuess);
-hintButton.addEventListener("click", getHint);
 adminButton.addEventListener("click", adminMode);
 
 // Generate a random secret number of the specified digits
@@ -56,9 +54,11 @@ function makeGuess() {
     return;
   }
 
+  const clue = guess[0]; // Extract the first digit as the clue
+
   const result = checkGuess(guess);
 
-  displayGuessResult(guess, result.correctPlace, result.correctDigits, result.incorrectDigits);
+  displayGuessResult(guess, result.correctPlace, result.correctDigits, result.incorrectDigits, clue);
 
   if (result.correctPlace === guessDigits) {
     endGame();
@@ -101,11 +101,12 @@ function checkGuess(guess) {
 }
 
 // Display the result of a guess in the table
-function displayGuessResult(guess, correctPlace, correctDigits, incorrectDigits) {
+function displayGuessResult(guess, correctPlace, correctDigits, incorrectDigits, clue) {
   const newRow = document.createElement("tr");
   newRow.innerHTML = `
     <td>${guessCount}</td>
     <td>${guess}</td>
+    <td>${clue}</td> <!-- Display the clue -->
     <td>${correctPlace}</td>
     <td>${correctDigits}</td>
     <td>${incorrectDigits}</td>
@@ -113,75 +114,32 @@ function displayGuessResult(guess, correctPlace, correctDigits, incorrectDigits)
   guessTableBody.appendChild(newRow);
 }
 
-// End the game or transition to the next step
+// End the game
 function endGame() {
   gameEnded = true;
   guessInputElement.disabled = true;
   guessButton.disabled = true;
-  hintButton.disabled = true;
   adminButton.disabled = true;
+  alert(`Congratulations! You guessed the number in ${guessCount} attempts.`);
 
-  // Move the focus back to the guess input field
-  guessInputElement.focus();
+  level++;
+  secretNumberDigits++;
+  guessDigits = secretNumberDigits;
+  secretNumber = generateSecretNumber(secretNumberDigits);
+  guessCount = 1; // Reset the guess count
 
-  setTimeout(() => {
-    alert(`Congratulations! You guessed the number in ${guessCount} attempts.`);
+  levelElement.textContent = level;
+  digitsElement.textContent = secretNumberDigits;
+  guessDigitsElement.textContent = guessDigits;
+  guessTableBody.innerHTML = ""; // Clear previous guesses from the table
 
-    if (guessDigits === 3) {
-      // Completed step 1
-      alert("You have completed step 1. Proceeding to step 2.");
-      // Perform any necessary actions specific to step 1 completion
-
-      // Update variables for step 2
-      level++;
-      secretNumberDigits++;
-      guessDigits = secretNumberDigits;
-      secretNumber = generateSecretNumber(secretNumberDigits);
-      guessCount = 1; // Reset the guess count
-
-      // Update DOM elements for step 2
-      levelElement.textContent = level;
-      digitsElement.textContent = secretNumberDigits;
-      guessDigitsElement.textContent = guessDigits;
-      guessTableBody.innerHTML = ""; // Clear previous guesses from the table
-
-      guessInputElement.value = ""; // Reset the guess input
-      guessInputElement.disabled = false; // Enable the guess input field for step 2
-      guessInputElement.focus(); // Set focus to the guess input for the next guess
-
-      guessButton.disabled = false;
-      hintButton.disabled = false;
-      adminButton.disabled = false;
-
-      // Update the score based on the current level and guess count
-      updateScore();
-    } else {
-      // Completed step 2
-      alert("You have completed step 2. Game over.");
-      // Perform any necessary actions specific to step 2 completion
-    }
-  }, 0);
+  guessInputElement.value = ""; // Reset the guess input
+  guessInputElement.focus(); // Set focus to the guess input for the next guess
 }
 
 // Update the score based on the current level and guess count
 function updateScore() {
   score = level * 10 - guessCount;
-  scoreElement.textContent = score;
-}
-
-// Get a hint by revealing a random digit of the secret number
-function getHint() {
-  if (score < 5) {
-    alert("Not enough points to get a hint!");
-    return;
-  }
-
-  const hintIndex = Math.floor(Math.random() * secretNumberDigits);
-  const hintDigit = secretNumber.charAt(hintIndex);
-
-  alert(`Hint: The digit at index ${hintIndex} is ${hintDigit}.`);
-
-  score -= 5;
   scoreElement.textContent = score;
 }
 
