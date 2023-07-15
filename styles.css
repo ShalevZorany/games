@@ -1,20 +1,14 @@
-/* Reset default browser styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 body {
   background-color: #f5f5f5;
   font-family: 'Roboto', sans-serif;
+  color: #333;
 }
 
 .game-container {
   max-width: 800px;
   margin: 0 auto;
   padding: 40px;
-  background-color: #fff;
+  background-color: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -22,105 +16,96 @@ body {
 .game-title {
   font-size: 36px;
   font-weight: bold;
-  color: #333;
-  margin-bottom: 20px;
   text-align: center;
-}
-
-.rules-container {
   margin-bottom: 30px;
+  background: linear-gradient(to right, #ff0066, #6600ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.rules {
-  background-color: #f9f9f9;
-  padding: 20px;
-  border-radius: 8px;
-}
-
-.rules h2 {
-  font-size: 24px;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 10px;
-}
-
-.rules ul {
-  list-style-type: disc;
-  margin-left: 20px;
-}
-
-.scoring {
-  background-color: #f9f9f9;
+.rules-container, .scoring {
+  background-color: #ffffff;
   padding: 20px;
   border-radius: 8px;
   margin-bottom: 30px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.scoring h2 {
+.rules h2, .scoring h2 {
   font-size: 24px;
   font-weight: bold;
   color: #333;
+  margin-top: 0;
+}
+
+.rules-container .rules {
+  background-color: #ffd700;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.rules-container .rules li {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
   margin-bottom: 10px;
-}
-
-.scoring p {
-  margin-bottom: 10px;
-}
-
-.scoring ul {
-  list-style-type: disc;
-  margin-left: 20px;
-}
-
-.game-info {
-  margin-bottom: 30px;
 }
 
 .game-info p {
-  margin-bottom: 10px;
+  margin: 0;
+  color: #777;
+}
+
+.game-info span {
+  font-weight: bold;
+  color: #333;
 }
 
 .input-container {
   display: flex;
-  flex-wrap: wrap; /* NEW */
   align-items: center;
-  justify-content: space-between; /* NEW */
-  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
-#guessInput, .submit-button, .hint-button, .admin-button {
-  flex: 1 0 100%; /* NEW */
-  margin-top: 10px; /* NEW */
-  padding: 8px;
-  font-size: 16px;
+#guessInput {
+  flex: 1;
+  padding: 12px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
   border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.submit-button, .hint-button, .admin-button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 .submit-button {
-  font-weight: bold;
-  background-color: #333;
-  color: #fff;
-  border: none;
-  cursor: pointer;
+  background-color: #4caf50;
+  color: white;
 }
 
 .hint-button {
-  font-weight: bold;
-  background-color: #ccc;
-  color: #333;
-  border: none;
-  cursor: pointer;
+  background-color: #2196f3;
+  color: white;
 }
 
 .admin-button {
-  font-weight: bold;
-  background-color: #ff5252;
-  color: #fff;
-  border: none;
-  cursor: pointer;
+  background-color: #f44336;
+  color: white;
 }
 
 .game-table {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   margin-bottom: 30px;
 }
 
@@ -128,34 +113,51 @@ body {
   font-size: 24px;
   font-weight: bold;
   color: #333;
+  margin-top: 0;
   margin-bottom: 20px;
 }
 
 #guessTable {
-  width: 100%;
+  font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
+  width: 100%;
 }
 
-#guessTable thead th {
-  font-weight: bold;
+#guessTable td, #guessTable th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#guessTable tr:nth-child(even){
+  background-color: #f2f2f2;
+}
+
+#guessTable tr:hover {
+  background-color: #ddd;
+}
+
+#guessTable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
   text-align: left;
-  padding: 8px;
-  border-bottom: 2px solid #333;
-}
-
-#guessTableBody td {
-  padding: 8px;
-  border-bottom: 1px solid #ccc;
+  background-color: #4caf50;
+  color: white;
 }
 
 .footer {
   text-align: center;
   font-size: 14px;
-  margin-top: 20px;
+  margin-top: 30px;
+}
+
+.footer p {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
 }
 
 .footer a {
-  color: #333;
+  color: #2196f3;
   text-decoration: none;
 }
 
