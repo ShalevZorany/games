@@ -46,7 +46,7 @@ function validateGuess(guess) {
 
 // Function to process the user's guess
 function processGuess(guess) {
-  if (gameOver) {
+  if (gameOver || step > 5) {
     return;
   }
 
@@ -100,7 +100,7 @@ function processGuess(guess) {
 
   // Check if the user has guessed all digits correctly
   if (correctPlace === secretNumberDigits) {
-    if (step < 3) {
+    if (step < 5) {
       step++;
       secretNumberDigits++;
       guessDigits = 0;
@@ -116,7 +116,7 @@ function processGuess(guess) {
     } else {
       // Game Over
       gameOver = true;
-      alert('Congratulations! You have completed all the steps.\nFinal Score: ' + totalScore + '\nGame Over');
+      alert('Congratulations! You have completed all the steps.\nTotal Score: ' + totalScore + '\nGame Over');
       // You can add any additional logic or actions for the end of the game here
     }
   }
