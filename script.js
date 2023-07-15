@@ -60,9 +60,13 @@ function makeGuess() {
 
   displayGuessResult(guess, result.correctPlace, result.correctDigits, result.incorrectDigits);
 
-  if (result.correctPlace === guessDigits) {
+  if (result.correctPlace === guessDigits && level === 1) {
     endGame();
-  } else if (level > 1) { // Check if the current level is greater than 1
+  } else {
+    if (result.correctPlace === guessDigits && level > 1) {
+      alert("Congratulations! You guessed the number in step 2.");
+    }
+
     guessCount++;
     updateScore();
     guessInputElement.value = "";
