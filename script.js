@@ -85,13 +85,24 @@ function checkGuess(guess) {
 // Display the guess and result in the table
 function displayGuess(guess, result) {
   const row = document.createElement('tr');
-  row.innerHTML = `
-    <td>${guessCount}</td>
-    <td>${guess}</td>
-    <td>${result.correctPlace}</td>
-    <td>${result.correctDigits}</td>
-    <td>${result.incorrectDigits}</td>
-  `;
+  const indexCell = document.createElement('td');
+  const guessCell = document.createElement('td');
+  const correctPlaceCell = document.createElement('td');
+  const correctDigitsCell = document.createElement('td');
+  const incorrectDigitsCell = document.createElement('td');
+
+  indexCell.textContent = guessCount;
+  guessCell.textContent = guess;
+  correctPlaceCell.textContent = result.correctPlace;
+  correctDigitsCell.textContent = result.correctDigits;
+  incorrectDigitsCell.textContent = result.incorrectDigits;
+
+  row.appendChild(indexCell);
+  row.appendChild(guessCell);
+  row.appendChild(correctPlaceCell);
+  row.appendChild(correctDigitsCell);
+  row.appendChild(incorrectDigitsCell);
+
   guessTableBody.appendChild(row);
 }
 
