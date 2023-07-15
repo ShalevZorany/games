@@ -1,23 +1,29 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+}
+
 .game-container {
-  max-width: 800px;
+  max-width: 600px;
   margin: 0 auto;
   padding: 40px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
+  background-color: #fff;
+  border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .game-title {
   font-size: 36px;
   font-weight: bold;
-  color: purple;
+  color: #5e35b1;
   text-align: center;
+  margin-bottom: 30px;
 }
 
 .rules-container {
-  background-color: #ffc107;
+  background-color: #ffd54f;
   padding: 20px;
-  border-radius: 8px;
+  border-radius: 10px;
   margin-bottom: 30px;
 }
 
@@ -30,10 +36,12 @@
 .rules h2 {
   font-size: 24px;
   font-weight: bold;
-  color: #3c4146;
+  color: #5e35b1;
   background-color: #ffeb3b;
   padding: 10px;
   border-radius: 4px;
+  margin-top: 0;
+  margin-bottom: 15px;
 }
 
 .game-info {
@@ -43,6 +51,7 @@
 
 .game-info p {
   margin: 10px 0;
+  font-size: 20px;
 }
 
 .input-container {
@@ -65,27 +74,27 @@
 }
 
 .submit-button {
-  background-color: purple;
-  color: white;
+  background-color: #5e35b1;
+  color: #fff;
   cursor: pointer;
 }
 
 .submit-button:hover,
 .hint-button:hover,
 .admin-button:hover {
-  background-color: #5a2ca1;
+  background-color: #4527a0;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .hint-button {
-  background-color: #5e35b1;
-  color: white;
+  background-color: #7b1fa2;
+  color: #fff;
   cursor: pointer;
 }
 
 .admin-button {
-  background-color: #d32f2f;
-  color: white;
+  background-color: #c62828;
+  color: #fff;
   cursor: pointer;
 }
 
@@ -99,17 +108,17 @@
 }
 
 #guessTable {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Arial, sans-serif;
   border-collapse: collapse;
   width: 100%;
-  background-color: #f9f9f9;
-  border-radius: 8px;
+  background-color: #fff;
+  border-radius: 10px;
 }
 
 #guessTable td,
 #guessTable th {
   border: 1px solid #ddd;
-  padding: 8px;
+  padding: 10px;
 }
 
 #guessTable tr:nth-child(even) {
@@ -124,8 +133,8 @@
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
-  background-color: purple;
-  color: white;
+  background-color: #5e35b1;
+  color: #fff;
 }
 
 .footer {
@@ -167,6 +176,7 @@
 
   .game-info p {
     margin: 15px 0;
+    font-size: 18px;
   }
 
   #guessInput,
@@ -211,6 +221,7 @@
 
   .game-info p {
     margin: 15px 0;
+    font-size: 16px;
   }
 
   #guessInput,
