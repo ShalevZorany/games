@@ -181,11 +181,12 @@ function revealSecretNumber() {
   }
 
   adminUsed = true;
-  const currentScore = score; // Store the current score
-  totalScore -= currentScore; // Deduct the current score from the total score
-  alert('Admin: The secret number is ' + secretNumber + '\nScore: ' + currentScore);
-document.getElementById('score').innerText = score;
+  score += 100; // Increase the score by 100
+  totalScore += 100; // Update the total score
+  alert('Admin: The secret number is ' + secretNumber + '\nScore: ' + score);
+  document.getElementById('score').textContent = score;
 }
+
 
 // Function to start a new game
 function startNewGame() {
