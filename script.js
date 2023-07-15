@@ -1,77 +1,129 @@
-// Get a random number within a specified range
-function getRandomNumber(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+// Initialize game variables
+let step = 1;
+let score = 0;
+let secretNumberDigits = 3;
+let guessDigits = 0;
+let secretNumber = generateSecretNumber(secretNumberDigits);
+let guesses = [];
 
-// Generate a new secret number with a specified number of digits
+// Function to generate a random secret number with the specified number of digits
 function generateSecretNumber(digits) {
-  let secretNumber = '';
-  const uniqueDigits = Array.from({ length: 10 }, (_, i) => i); // Array of unique digits 0-9
+  let number = '';
+  const digitsArray = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
-  while (secretNumber.length < digits) {
-    const randomIndex = getRandomNumber(0, uniqueDigits.length - 1);
-    const digit = uniqueDigits.splice(randomIndex, 1)[0];
-    secretNumber += digit.toString();
+  while (number.length < digits) {
+    const randomIndex = Math.floor(Math.random() * digitsArray.length);
+    const digit = digitsArray[randomIndex];
+
+    if (!number.includes(digit)) {
+      number += digit;
+    }
   }
 
-  return secretNumber;
+  return number;
 }
 
-// Compare the user's guess with the secret number and return the result
-function compareGuess(guess, secretNumber) {
+// Function to validate the user's guess
+function validateGuess(guess) {
+  if (guess.length !== secretNumberDigits) {
+    return false;
+  }
+
+  if (new Set(guess).size !== secretNumberDigits) {
+    return false;
+  }
+
+  if (guess.includes('0')) {
+    return false;
+  }
+
+  return true;
+}
+
+// Function to process the user's guess
+function processGuess(guess) {
+  if (!validateGuess(guess)) {
+    alert('Invalid guess! Make sure you enter a ' + secretNumberDigits + '-digit number with no repeating digits, and without the digit 0.');
+    return;
+  }
+
   let correctPlace = 0;
   let correctDigits = 0;
   let incorrectDigits = 0;
 
-  for (let i = 0; i < guess.length; i++) {
-    if (guess[i] === secretNumber[i]) {
+  for (let i = 0; i < secretNumber.length; i++) {
+    const secretDigit = secretNumber[i];
+    const guessDigit = guess[i];
+
+    if (secretDigit === guessDigit) {
       correctPlace++;
-    } else if (secretNumber.includes(guess[i])) {
+    } else if (secretNumber.includes(guessDigit)) {
       correctDigits++;
     } else {
       incorrectDigits++;
     }
   }
 
-  return {
-    correctPlace,
-    correctDigits,
-    incorrectDigits
-  };
-}
+  guesses.push({
+    guess: guess,
+    correctPlace: correctPlace,
+    correctDigits: correctDigits,
+    incorrectDigits: incorrectDigits
+  });
 
-// Function to handle the user's guess
-function handleGuess() {
-  const guessInput = document.getElementById('guessInput');
-  const guess = guessInput.value;
-  const secretNumber = '123'; // Replace with your generated secret number
+  // Update game information
+  guessDigits++;
+  score += 10; // Increase score for each guess
+  document.getElementById('score').textContent = score;
+  document.getElementById('guessDigits').textContent = guessDigits;
 
-  const result = compareGuess(guess, secretNumber);
-
-  // Update the table with the guess and result
+  // Update guess table
   const guessTableBody = document.getElementById('guessTableBody');
-  const newRow = guessTableBody.insertRow();
-  const cell1 = newRow.insertCell();
-  const cell2 = newRow.insertCell();
-  const cell3 = newRow.insertCell();
-  const cell4 = newRow.insertCell();
-  const cell5 = newRow.insertCell();
-  cell1.textContent = guessTableBody.rows.length;
-  cell2.textContent = guess;
-  cell3.textContent = result.correctPlace;
-  cell4.textContent = result.correctDigits;
-  cell5.textContent = result.incorrectDigits;
+  const newRow = document.createElement('tr');
+  newRow.innerHTML = `
+    <td>${guesses.length}</td>
+    <td>${guess}</td>
+    <td>${correctPlace}</td>
+    <td>${correctDigits}</td>
+    <td>${incorrectDigits}</td>
+  `;
+  guessTableBody.appendChild(newRow);
 
-  // Clear the guess input field
-  guessInput.value = '';
-
-  // Update the score
-  const scoreSpan = document.getElementById('score');
-  let score = parseInt(scoreSpan.textContent);
-  score += 10; // Increase the score based on your desired logic
-  scoreSpan.textContent = score.toString();
+  // Check if the user has guessed all digits correctly
+  if (correctPlace === secretNumberDigits) {
+    if (step < 3) {
+      step++;
+      secretNumberDigits++;
+      guessDigits = 0;
+      secretNumber = generateSecretNumber(secretNumberDigits);
+      guesses = [];
+      alert('Congratulations! You have guessed all the digits correctly. Moving on to the next step.');
+      document.getElementById('step').textContent = step;
+      document.getElementById('digits').textContent = secretNumberDigits;
+      document.getElementById('guessDigits').textContent = guessDigits;
+      guessTableBody.innerHTML = '';
+    } else {
+      // Game Over
+      alert('Congratulations! You have completed all the steps. Final Score: ' + score);
+      // You can add any additional logic or actions for the end of the game here
+    }
+  }
 }
 
 // Event listener for the guess button
-const guessButton = document.getElementById('guessButton');
-guessButton.addEventListener('click', handleGuess);
+document.getElementById('guessButton').addEventListener('click', function() {
+  const guessInput = document.getElementById('guessInput');
+  const guess = guessInput.value.trim();
+  guessInput.value = '';
+  processGuess(guess);
+});
+
+// Event listener for the hint button (not implemented for this version)
+document.getElementById('hintButton').addEventListener('click', function() {
+  alert('Hint functionality is not implemented in this version.');
+});
+
+// Event listener for the admin button (for demonstration purposes only)
+document.getElementById('adminButton').addEventListener('click', function() {
+  alert('Admin functionality is not implemented in this version.');
+});
