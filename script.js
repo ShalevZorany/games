@@ -153,10 +153,7 @@ document.getElementById('hintButton').addEventListener('click', function() {
 
 // Event listener for the admin button
 document.getElementById('adminButton').addEventListener('click', function() {
-  const secretNumber = generateSecretNumber();
-  showResultMessage(`The secret number is ${secretNumber}. Your score has increased by 100 points.`, 'green');
-  score += 100;
-  document.getElementById('score').textContent = score;
+  revealSecretNumber();
 });
 
 // Event listener for the new game button
