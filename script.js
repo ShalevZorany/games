@@ -124,33 +124,12 @@ function endGame() {
 
   level++;
   secretNumberDigits++;
-
-  // Update guessDigits for level 2
-  if (level === 2) {
-    guessDigits = secretNumberDigits;
-  }
-
+  guessDigits = secretNumberDigits;
   secretNumber = generateSecretNumber(secretNumberDigits);
 
   levelElement.textContent = level;
   digitsElement.textContent = secretNumberDigits;
   guessDigitsElement.textContent = guessDigits;
-
-  // Clear previous guesses
-  while (guessTableBody.firstChild) {
-    guessTableBody.removeChild(guessTableBody.firstChild);
-  }
-
-  // Reset guess count
-  guessCount = 1;
-
-  // Enable input and buttons for new guess
-  guessInputElement.disabled = false;
-  guessButton.disabled = false;
-  hintButton.disabled = false;
-  adminButton.disabled = false;
-  guessInputElement.value = "";
-  guessInputElement.focus();
 }
 
 // Update the score based on the current level and guess count
@@ -169,7 +148,7 @@ function getHint() {
   const hintIndex = Math.floor(Math.random() * secretNumberDigits);
   const hintDigit = secretNumber.charAt(hintIndex);
 
-  alert(`Hint: The first digit is ${hintDigit}.`);
+  alert(`Hint: The digit at index ${hintIndex} is ${hintDigit}.`);
 
   score -= 5;
   scoreElement.textContent = score;
