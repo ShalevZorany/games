@@ -220,3 +220,22 @@ body {
     margin-top: 20px;
   }
 }
+
+/* Safari Fix */
+@media not all and (min-resolution:.001dpcm) { @supports (-webkit-appearance:none) {
+  /* Safari Only CSS Rules Here */
+  body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .game-container {
+    flex: 1;
+  }
+}}
+
+/* Mobile Zoom Prevention */
+html, body {
+  touch-action: manipulation;
+}
