@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Guess the Number</title>
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -14,16 +14,25 @@
     
     <div class="rules-container">
       <div class="rules">
-        <h2>Game Rules</h2>
+        <h2>Game Description:</h2>
+        <p>Welcome to Guess the Number! In this game, your objective is to guess the secret number. The secret number consists of a certain number of digits, and the number of digits will increase as you progress through different levels.</p>
+        <p>The game rules are as follows:</p>
         <ul>
-          <li>Guess the secret number of a certain number of digits.</li>
-          <li>Number of digits increases with level.</li>
-          <li>Score decreases over time, so guess quickly!</li>
-          <li>Get a hint for the cost of some points.</li>
-          <li>No digit repeats in the secret number.</li>
-          <li>Use the 'Admin' button only if you are the game admin.</li>
+          <li>Enter a guess in the input field provided. The guess should be a numeric value.</li>
+          <li>The score will decrease over time, so make your guesses quickly to earn higher scores.</li>
+          <li>To assist you in guessing the number, you can use the 'Get Hint' button. However, using a hint will deduct some points from your score.</li>
+          <li>Ensure that no digit repeats in your guess.</li>
+          <li>Use the 'Admin' button only if you are the game administrator.</li>
+        </ul>
+        <p>Explanation of the Score:</p>
+        <ul>
+          <li>For each guess you make, regardless of whether it is correct or not, you earn 10 points. The score increases with each guess.</li>
+          <li>If you use the 'Get Hint' button, it will deduct a certain number of points from your score. The exact deduction may vary depending on the game implementation.</li>
+          <li>Using the 'Admin' button, available only to the game administrator, will not deduct any points from the score.</li>
+          <li>The final score is calculated based on the total points earned throughout the game.</li>
         </ul>
       </div>
+    </div>
     </div>
     
     <div class="game-info">
