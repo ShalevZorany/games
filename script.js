@@ -187,7 +187,7 @@ function revealSecretNumber() {
   const currentScore = score; // Store the current score
   totalScore -= currentScore; // Deduct the current score from the total score
   alert('Admin: The secret number is ' + secretNumber + '\nScore: ' + currentScore);
-  document.getElementById('score').textContent = score;
+document.getElementById('score').innerText = score;
 }
 
 // Function to start a new game
