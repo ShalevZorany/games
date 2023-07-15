@@ -100,7 +100,7 @@ function processGuess(guess) {
 
   // Check if the user has guessed all digits correctly
   if (correctPlace === secretNumberDigits) {
-    if (step < 5) {
+    if (step < 3) {
       step++;
       secretNumberDigits++;
       guessDigits = 0;
@@ -109,14 +109,14 @@ function processGuess(guess) {
       hintUsed = false;
       adminUsed = false;
       alert('Congratulations! You have guessed all the digits correctly. Moving on to the next step.');
-      document.getElementById('step').textContent = step;
+      document.getElementById('level').textContent = step;
       document.getElementById('digits').textContent = secretNumberDigits;
       document.getElementById('guessDigits').textContent = guessDigits;
       guessTableBody.innerHTML = '';
     } else {
-      // Game Over
+      // Game Over after Stage 3
       gameOver = true;
-      alert('Congratulations! You have completed all the steps.\nTotal Score: ' + totalScore + '\nGame Over');
+      alert('Congratulations! You have completed Stage 3.\nGame Over');
       showResult(totalScore);
       showNewGameButton();
     }
@@ -134,6 +134,35 @@ function showNewGameButton() {
   const newGameButton = document.getElementById('newGameButton');
   newGameButton.style.display = 'inline-block';
 }
+
+// Event listener for the guess button
+document.getElementById('guessButton').addEventListener('click', function() {
+  const guessInput = document.getElementById('guessInput');
+  const guess = guessInput.value.trim();
+  guessInput.value = '';
+  processGuess(guess);
+});
+
+// Event listener for the hint button
+document.getElementById('hintButton').addEventListener('click', function() {
+  getHint();
+  if (step === 5) {
+    document.getElementById('hintButton').disabled = true;
+  }
+});
+
+// Event listener for the admin button
+document.getElementById('adminButton').addEventListener('click', function() {
+  revealSecretNumber();
+  if (step === 5) {
+    document.getElementById('adminButton').disabled = true;
+  }
+});
+
+// Event listener for the new game button
+document.getElementById('newGameButton').addEventListener('click', function() {
+  startNewGame();
+});
 
 // Function to provide a hint by revealing the first digit of the secret number
 function getHint() {
@@ -155,19 +184,10 @@ function revealSecretNumber() {
   }
 
   adminUsed = true;
-  score += 100; // Increase score by 100 for using the admin button
   const currentScore = score; // Store the current score
   totalScore -= currentScore; // Deduct the current score from the total score
-
   alert('Admin: The secret number is ' + secretNumber + '\nScore: ' + currentScore);
   document.getElementById('score').textContent = score;
-
-  // Update guess table scores to 0
-  const guessTableRows = document.querySelectorAll('#guessTableBody tr');
-  guessTableRows.forEach((row) => {
-    const scoreCell = row.querySelector('td:nth-child(3)');
-    scoreCell.textContent = '0';
-  });
 }
 
 // Function to start a new game
@@ -182,30 +202,16 @@ function startNewGame() {
   hintUsed = false;
   adminUsed = false;
   gameOver = false;
-
-  // Reset the HTML elements
-  document.getElementById('step').textContent = step;
+  document.getElementById('level').textContent = step;
   document.getElementById('score').textContent = score;
   document.getElementById('digits').textContent = secretNumberDigits;
   document.getElementById('guessDigits').textContent = guessDigits;
   document.getElementById('guessTableBody').innerHTML = '';
   document.getElementById('result').textContent = '';
   document.getElementById('newGameButton').style.display = 'none';
+  document.getElementById('hintButton').disabled = false;
+  document.getElementById('adminButton').disabled = false;
 }
 
-// Event listener for the guess button
-document.getElementById('guessButton').addEventListener('click', function() {
-  const guessInput = document.getElementById('guessInput');
-  const guess = guessInput.value.trim();
-  guessInput.value = '';
-  processGuess(guess);
-});
-
-// Event listener for the hint button
-document.getElementById('hintButton').addEventListener('click', getHint);
-
-// Event listener for the admin button
-document.getElementById('adminButton').addEventListener('click', revealSecretNumber);
-
-// Event listener for the new game button
-document.getElementById('newGameButton').addEventListener('click', startNewGame);
+// Initialize the game
+startNewGame();
