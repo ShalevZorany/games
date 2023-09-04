@@ -89,6 +89,9 @@ function processGuess(guess) {
         incorrectDigits: incorrectDigits
     });
 
+    // Call the function to update the table
+    updateGuessTable();
+
     if (correctPlace === secretNumberDigits && step === 3) {
         checkGuess(true); // Correct guess
         // Game Over after Stage 3
