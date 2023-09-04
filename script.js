@@ -29,55 +29,67 @@ function generateSecretNumber(digits) {
 
 // Function to validate the user's guess
 function validateGuess(guess) {
-  if (guess.length !== secretNumberDigits) {
-    return false;
-  }
-
-  if (new Set(guess).size !== secretNumberDigits) {
-    return false;
-  }
-
-  if (guess.includes('0')) {
-    return false;
-  }
-
-  return true;
+    if (guess.length !== secretNumberDigits) {
+        return false;
+    }
+    if (new Set(guess).size !== secretNumberDigits) {
+        return false;
+    }
+    if (guess.includes('0')) {
+        return false;
+    }
+    return true;
 }
 
-// Function to process the user's guess
-function processGuess(guess) {
-  if (gameOver || step > 5) {
-    return;
-  }
+function checkGuess(userGuess) {
+    const feedbackElement = document.getElementById('feedback');
 
-  if (!validateGuess(guess)) {
-    alert('Invalid guess! Make sure you enter a ' + secretNumberDigits + '-digit number with no repeating digits, and without the digit 0.');
-    return;
-  }
-
-  let correctPlace = 0;
-  let correctDigits = 0;
-  let incorrectDigits = 0;
-
-  for (let i = 0; i < secretNumber.length; i++) {
-    const secretDigit = secretNumber[i];
-    const guessDigit = guess[i];
-
-    if (secretDigit === guessDigit) {
-      correctPlace++;
-    } else if (secretNumber.includes(guessDigit)) {
-      correctDigits++;
+    if (validateGuess(userGuess)) {
+        feedbackElement.textContent = 'Correct!';
+        feedbackElement.classList.add('correct-feedback');
+        feedbackElement.classList.remove('incorrect-feedback');
     } else {
-      incorrectDigits++;
+        feedbackElement.textContent = 'Incorrect! Try again.';
+        feedbackElement.classList.add('incorrect-feedback');
+        feedbackElement.classList.remove('correct-feedback');
     }
-  }
+}
 
-  guesses.push({
-    guess: guess,
-    correctPlace: correctPlace,
-    correctDigits: correctDigits,
-    incorrectDigits: incorrectDigits
-  });
+function processGuess(guess) {
+    if (gameOver || step > 5) {
+        return;
+    }
+
+    if (!validateGuess(guess)) {
+        alert('Invalid guess! Make sure you enter a ' + secretNumberDigits + '-digit number with no repeating digits, and without the digit 0.');
+        return;
+    }
+
+    checkGuess(guess);
+
+    let correctPlace = 0;
+    let correctDigits = 0;
+    let incorrectDigits = 0;
+
+    for (let i = 0; i < secretNumber.length; i++) {
+        const secretDigit = secretNumber[i];
+        const guessDigit = guess[i];
+
+        if (secretDigit === guessDigit) {
+            correctPlace++;
+        } else if (secretNumber.includes(guessDigit)) {
+            correctDigits++;
+        } else {
+            incorrectDigits++;
+        }
+    }
+
+    guesses.push({
+        guess: guess,
+        correctPlace: correctPlace,
+        correctDigits: correctDigits,
+        incorrectDigits: incorrectDigits
+    });
 
   // Update game information
   guessDigits++;
