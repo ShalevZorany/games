@@ -111,14 +111,14 @@ function processGuess(guess) {
   // Check if the user has guessed all digits correctly
 if (correctPlace === secretNumberDigits) {
     checkGuess(true); // Correct guess
+    // Game Over after Stage 3
+    gameOver = true;
+    alert('Congratulations! You have completed Stage 3.\nGame Over');
+    showResult(totalScore);
+    showNewGameButton();
 } else {
     checkGuess(false); // Incorrect guess
 }
-      // Game Over after Stage 3
-      gameOver = true;
-      alert('Congratulations! You have completed Stage 3.\nGame Over');
-      showResult(totalScore);
-      showNewGameButton();
     }
 
 // Function to show the result
