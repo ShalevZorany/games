@@ -65,8 +65,6 @@ function processGuess(guess) {
         return;
     }
 
-// checkGuess(guess);
-
     let correctPlace = 0;
     let correctDigits = 0;
     let incorrectDigits = 0;
