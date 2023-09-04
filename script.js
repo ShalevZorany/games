@@ -108,9 +108,10 @@ if (correctPlace === secretNumberDigits) {
         document.getElementById('level').textContent = step;
         alert('Correct guess! Proceed to Stage ' + step);
 
-        // Now reset game variables for the next step
-        secretNumberDigits++; // Increase difficulty by adding one more digit
-      document.getElementById('digits').textContent = secretNumberDigits;
+secretNumberDigits++; // Increase difficulty by adding one more digit
+console.log("Updated secretNumberDigits:", secretNumberDigits); // Debugging line
+document.getElementById('digits').textContent = secretNumberDigits;
+console.log("DOM content:", document.getElementById('digits').textContent); // Debugging line
 
         secretNumber = generateSecretNumber(secretNumberDigits);
         guesses = [];
