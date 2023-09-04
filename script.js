@@ -56,7 +56,7 @@ function checkGuess(isCorrect) {
 }
 
 function processGuess(guess) {
-    if (gameOver || step > 5) {
+    if (gameOver) {
         return;
     }
 
@@ -89,75 +89,24 @@ function processGuess(guess) {
         incorrectDigits: incorrectDigits
     });
 
-  // Update game information
-  guessDigits++;
-  score += 10; // Increase score for each guess
-  totalScore += score; // Update the total score
-  document.getElementById('score').textContent = score;
-  document.getElementById('guessDigits').textContent = guessDigits;
-
-  // Update guess table
-  const guessTableBody = document.getElementById('guessTableBody');
-  const newRow = document.createElement('tr');
-  newRow.innerHTML = `
-    <td>${guesses.length}</td>
-    <td>${guess}</td>
-    <td>${correctPlace}</td>
-    <td>${correctDigits}</td>
-    <td>${incorrectDigits}</td>
-  `;
-  guessTableBody.appendChild(newRow);
-
-  // Check if the user has guessed all digits correctly
-if (correctPlace === secretNumberDigits) {
-    checkGuess(true); // Correct guess
-    // Game Over after Stage 3
-    gameOver = true;
-    alert('Congratulations! You have completed Stage 3.\nGame Over');
-    showResult(totalScore);
-    showNewGameButton();
-} else {
-    checkGuess(false); // Incorrect guess
-}
+    if (correctPlace === secretNumberDigits && step === 3) {
+        checkGuess(true); // Correct guess
+        // Game Over after Stage 3
+        gameOver = true;
+        alert('Congratulations! You have completed Stage 3.\nGame Over');
+        showResult(totalScore);
+        showNewGameButton();
+    } else {
+        checkGuess(false); // Incorrect guess
     }
 
-// Function to show the result
-function showResult(score) {
-  const resultContainer = document.getElementById('result');
-  resultContainer.textContent = 'Your Result: ' + score + ' points';
+    if (correctPlace === secretNumberDigits && step <= 3) {
+        step++;
+        document.getElementById('level').textContent = step;
+        alert('Correct guess! Proceed to Stage ' + step);
+        startNewGame();
+    }
 }
-
-// Function to show the "New Game" button
-function showNewGameButton() {
-  const newGameButton = document.getElementById('newGameButton');
-  newGameButton.style.display = 'inline-block';
-}
-
-// Event listener for the guess button
-document.getElementById('guessButton').addEventListener('click', function() {
-  const guessInput = document.getElementById('guessInput');
-  const guess = guessInput.value.trim();
-  guessInput.value = '';
-  processGuess(guess);
-});
-
-// Event listener for the hint button
-document.getElementById('hintButton').addEventListener('click', function() {
-  getHint();
-  if (step === 5) {
-    document.getElementById('hintButton').disabled = true;
-  }
-});
-
-// Event listener for the admin button
-document.getElementById('adminButton').addEventListener('click', function() {
-  revealSecretNumber();
-});
-
-// Event listener for the new game button
-document.getElementById('newGameButton').addEventListener('click', function() {
-  startNewGame();
-});
 
 // Function to provide a hint by revealing the first digit of the secret number
 function getHint() {
