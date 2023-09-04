@@ -92,30 +92,32 @@ function processGuess(guess) {
     // Call the function to update the table
     updateGuessTable();
 
-    if (correctPlace === secretNumberDigits) {
-        if (step === 3) {
-            checkGuess(true); // Correct guess
-            // Game Over after Stage 3
-            gameOver = true;
-            alert('Congratulations! You have completed Stage 3.\nGame Over');
-            showResult(totalScore);
-            showNewGameButton();
-        } else {
-            checkGuess(true); // Correct guess
-            step++;
-            document.getElementById('level').textContent = step;
-            alert('Correct guess! Proceed to Stage ' + step);
-
-            // Reset game variables for the next step
-            secretNumberDigits++; // Increase difficulty by adding one more digit
-            secretNumber = generateSecretNumber(secretNumberDigits);
-            guesses = [];
-            hintUsed = false;
-            adminUsed = false;
-            document.getElementById('guessTableBody').innerHTML = '';
-        }
+if (correctPlace === secretNumberDigits) {
+    if (step === 3) {
+        checkGuess(true); // Correct guess
+        // Game Over after Stage 3
+        gameOver = true;
+        alert('Congratulations! You have completed Stage 3.\nGame Over');
+        showResult(totalScore);
+        showNewGameButton();
     } else {
-        checkGuess(false); // Incorrect guess
+        checkGuess(true); // Correct guess
+        
+        // Increment and show the step BEFORE resetting game variables
+        step++;
+        document.getElementById('level').textContent = step;
+        alert('Correct guess! Proceed to Stage ' + step);
+
+        // Now reset game variables for the next step
+        secretNumberDigits++; // Increase difficulty by adding one more digit
+        secretNumber = generateSecretNumber(secretNumberDigits);
+        guesses = [];
+        hintUsed = false;
+        adminUsed = false;
+        document.getElementById('guessTableBody').innerHTML = '';
+    }
+} else {
+    checkGuess(false); // Incorrect guess
     }
 }
 
