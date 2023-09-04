@@ -116,7 +116,6 @@ if (correctPlace === secretNumberDigits) {
 } else {
     checkGuess(false); // Incorrect guess
 }
-    } else {
       // Game Over after Stage 3
       gameOver = true;
       alert('Congratulations! You have completed Stage 3.\nGame Over');
