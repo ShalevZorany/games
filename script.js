@@ -91,40 +91,32 @@ function processGuess(guess) {
 
     // Call the function to update the table
     updateGuessTable();
-function updateGuessTable() {
-  const guessTableBody = document.getElementById('guessTableBody');
-  guessTableBody.innerHTML = ''; // Clear the table body
 
-  guesses.forEach((guessObj, index) => {
-    const newRow = document.createElement('tr');
-    newRow.innerHTML = `
-      <td>${index + 1}</td>
-      <td>${guessObj.guess}</td>
-      <td>${guessObj.correctPlace}</td>
-      <td>${guessObj.correctDigits}</td>
-      <td>${guessObj.incorrectDigits}</td>
-    `;
-    guessTableBody.appendChild(newRow);
-  });
-}
+    if (correctPlace === secretNumberDigits) {
+        if (step === 3) {
+            checkGuess(true); // Correct guess
+            // Game Over after Stage 3
+            gameOver = true;
+            alert('Congratulations! You have completed Stage 3.\nGame Over');
+            showResult(totalScore);
+            showNewGameButton();
+        } else {
+            checkGuess(true); // Correct guess
+            step++;
+            document.getElementById('level').textContent = step;
+            alert('Correct guess! Proceed to Stage ' + step);
 
-if (correctPlace === secretNumberDigits) {
-    if (step === 3) {
-        checkGuess(true); // Correct guess
-        // Game Over after Stage 3
-        gameOver = true;
-        alert('Congratulations! You have completed Stage 3.\nGame Over');
-        showResult(totalScore);
-        showNewGameButton();
+            // Reset game variables for the next step
+            secretNumberDigits++; // Increase difficulty by adding one more digit
+            secretNumber = generateSecretNumber(secretNumberDigits);
+            guesses = [];
+            hintUsed = false;
+            adminUsed = false;
+            document.getElementById('guessTableBody').innerHTML = '';
+        }
     } else {
-        step++;
-        document.getElementById('level').textContent = step;
-        alert('Correct guess! Proceed to Stage ' + step);
-        startNewGame();
+        checkGuess(false); // Incorrect guess
     }
-} else {
-    checkGuess(false); // Incorrect guess
-}
 }
 
 // Function to provide a hint by revealing the first digit of the secret number
