@@ -110,6 +110,8 @@ if (correctPlace === secretNumberDigits) {
 
         // Now reset game variables for the next step
         secretNumberDigits++; // Increase difficulty by adding one more digit
+      document.getElementById('digits').textContent = secretNumberDigits;
+
         secretNumber = generateSecretNumber(secretNumberDigits);
         guesses = [];
         hintUsed = false;
