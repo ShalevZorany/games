@@ -8,7 +8,6 @@ body {
 .rules-container {
   max-width: 100%;
 }
-}
 
 .game-title {
   font-size: 36px;
@@ -125,7 +124,7 @@ body {
   padding: 8px;
 }
 
-#guessTable tr:nth-child(even){
+#guessTable tr:nth-child(even) {
   background-color: #f2f2f2;
 }
 
@@ -160,4 +159,29 @@ body {
 
 .footer a:hover {
   text-decoration: underline;
+}
+
+/* Feedback styles */
+.feedback {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 20px;
+  transition: all 0.3s ease; /* Smooth transition for any changes */
+}
+
+.correct-feedback {
+  color: green;
+}
+
+.incorrect-feedback {
+  color: red;
+  animation: shake 0.5s; /* Shake animation for incorrect feedback */
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  50% { transform: translateX(10px); }
+  75% { transform: translateX(-10px); }
+  100% { transform: translateX(0); }
 }
