@@ -41,10 +41,10 @@ function validateGuess(guess) {
     return true;
 }
 
-function checkGuess(userGuess) {
+function checkGuess(isCorrect) {
     const feedbackElement = document.getElementById('feedback');
 
-    if (validateGuess(userGuess)) {
+    if (isCorrect) {
         feedbackElement.textContent = 'Correct!';
         feedbackElement.classList.add('correct-feedback');
         feedbackElement.classList.remove('incorrect-feedback');
@@ -65,7 +65,7 @@ function processGuess(guess) {
         return;
     }
 
-    checkGuess(guess);
+// checkGuess(guess);
 
     let correctPlace = 0;
     let correctDigits = 0;
@@ -111,20 +111,11 @@ function processGuess(guess) {
   guessTableBody.appendChild(newRow);
 
   // Check if the user has guessed all digits correctly
-  if (correctPlace === secretNumberDigits) {
-    if (step < 3) {
-      step++;
-      secretNumberDigits++;
-      guessDigits = 0;
-      secretNumber = generateSecretNumber(secretNumberDigits);
-      guesses = [];
-      hintUsed = false;
-      adminUsed = false;
-      alert('Congratulations! You have guessed all the digits correctly. Moving on to the next step.');
-      document.getElementById('level').textContent = step;
-      document.getElementById('digits').textContent = secretNumberDigits;
-      document.getElementById('guessDigits').textContent = guessDigits;
-      guessTableBody.innerHTML = '';
+if (correctPlace === secretNumberDigits) {
+    checkGuess(true); // Correct guess
+} else {
+    checkGuess(false); // Incorrect guess
+}
     } else {
       // Game Over after Stage 3
       gameOver = true;
