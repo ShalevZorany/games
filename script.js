@@ -122,7 +122,6 @@ if (correctPlace === secretNumberDigits) {
       showResult(totalScore);
       showNewGameButton();
     }
-  }
 }
 
 // Function to show the result
