@@ -157,6 +157,18 @@ function startNewGame() {
   document.getElementById('hintButton').disabled = false;
   document.getElementById('adminButton').disabled = false;
 }
+// Add event listener for the 'Get Hint' button
+document.getElementById('hintButton').addEventListener('click', getHint);
+
+// Add event listener for the 'Admin' button
+document.getElementById('adminButton').addEventListener('click', revealSecretNumber);
+// Add event listener for the 'Guess' button
+document.getElementById('guessButton').addEventListener('click', () => {
+  const guessInput = document.getElementById('guessInput');
+  processGuess(guessInput.value);
+  guessInput.value = ''; // Clear the input field
+});
+
 
 // Initialize the game
 startNewGame();
