@@ -108,22 +108,22 @@ function updateGuessTable() {
   });
 }
 
-if (correctPlace === secretNumberDigits && step === 3) {
-    checkGuess(true); // Correct guess
-    // Game Over after Stage 3
-    gameOver = true;
-    alert('Congratulations! You have completed Stage 3.\nGame Over');
-    showResult(totalScore);
-    showNewGameButton();
+if (correctPlace === secretNumberDigits) {
+    if (step === 3) {
+        checkGuess(true); // Correct guess
+        // Game Over after Stage 3
+        gameOver = true;
+        alert('Congratulations! You have completed Stage 3.\nGame Over');
+        showResult(totalScore);
+        showNewGameButton();
+    } else {
+        step++;
+        document.getElementById('level').textContent = step;
+        alert('Correct guess! Proceed to Stage ' + step);
+        startNewGame();
+    }
 } else {
     checkGuess(false); // Incorrect guess
-}
-
-if (correctPlace === secretNumberDigits && step <= 3) {
-    step++;
-    document.getElementById('level').textContent = step;
-    alert('Correct guess! Proceed to Stage ' + step);
-    startNewGame();
 }
 }
 
