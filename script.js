@@ -108,23 +108,23 @@ function updateGuessTable() {
   });
 }
 
-    if (correctPlace === secretNumberDigits && step === 3) {
-        checkGuess(true); // Correct guess
-        // Game Over after Stage 3
-        gameOver = true;
-        alert('Congratulations! You have completed Stage 3.\nGame Over');
-        showResult(totalScore);
-        showNewGameButton();
-    } else {
-        checkGuess(false); // Incorrect guess
-    }
+if (correctPlace === secretNumberDigits && step === 3) {
+    checkGuess(true); // Correct guess
+    // Game Over after Stage 3
+    gameOver = true;
+    alert('Congratulations! You have completed Stage 3.\nGame Over');
+    showResult(totalScore);
+    showNewGameButton();
+} else {
+    checkGuess(false); // Incorrect guess
+}
 
-    if (correctPlace === secretNumberDigits && step <= 3) {
-        step++;
-        document.getElementById('level').textContent = step;
-        alert('Correct guess! Proceed to Stage ' + step);
-        startNewGame();
-    }
+if (correctPlace === secretNumberDigits && step <= 3) {
+    step++;
+    document.getElementById('level').textContent = step;
+    alert('Correct guess! Proceed to Stage ' + step);
+    startNewGame();
+}
 }
 
 // Function to provide a hint by revealing the first digit of the secret number
