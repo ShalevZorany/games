@@ -91,6 +91,22 @@ function processGuess(guess) {
 
     // Call the function to update the table
     updateGuessTable();
+function updateGuessTable() {
+  const guessTableBody = document.getElementById('guessTableBody');
+  guessTableBody.innerHTML = ''; // Clear the table body
+
+  guesses.forEach((guessObj, index) => {
+    const newRow = document.createElement('tr');
+    newRow.innerHTML = `
+      <td>${index + 1}</td>
+      <td>${guessObj.guess}</td>
+      <td>${guessObj.correctPlace}</td>
+      <td>${guessObj.correctDigits}</td>
+      <td>${guessObj.incorrectDigits}</td>
+    `;
+    guessTableBody.appendChild(newRow);
+  });
+}
 
     if (correctPlace === secretNumberDigits && step === 3) {
         checkGuess(true); // Correct guess
