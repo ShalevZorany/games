@@ -18,14 +18,16 @@ const feedbackElement = document.getElementById('feedback');
 const hintButton = document.getElementById('hintButton');
 const adminButton = document.getElementById('adminButton');
 
-// Function to generate a random secret number with the specified number of digits
+// Constants
+const DIGITS_ARRAY = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
+// Generate a random secret number with the specified number of digits
 function generateSecretNumber(digits) {
   let number = '';
-  const digitsArray = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
   while (number.length < digits) {
-    const randomIndex = Math.floor(Math.random() * digitsArray.length);
-    const digit = digitsArray[randomIndex];
+    const randomIndex = Math.floor(Math.random() * DIGITS_ARRAY.length);
+    const digit = DIGITS_ARRAY[randomIndex];
 
     if (!number.includes(digit)) {
       number += digit;
@@ -35,21 +37,15 @@ function generateSecretNumber(digits) {
   return number;
 }
 
-// Function to validate the user's guess
+// Validate the user's guess
 function validateGuess(guess) {
-  if (guess.length !== secretNumberDigits) {
-    return false;
-  }
-  if (new Set(guess).size !== secretNumberDigits) {
-    return false;
-  }
-  if (guess.includes('0')) {
+  if (guess.length !== secretNumberDigits || new Set(guess).size !== secretNumberDigits || guess.includes('0')) {
     return false;
   }
   return true;
 }
 
-// Function to update UI elements
+// Update UI elements
 function updateUI() {
   levelElement.textContent = step;
   scoreElement.textContent = score;
@@ -59,28 +55,23 @@ function updateUI() {
   adminButton.disabled = adminUsed || gameOver;
 }
 
-// Function to award points for guessing
+// Award points for guessing
 function awardPoints() {
   score += 10;
   updateUI();
 }
 
-// Function to check if the guess is correct
+// Check if the guess is correct
 function checkGuess(isCorrect) {
-  const feedbackElement = document.getElementById('feedback');
-
-  if (isCorrect) {
-    feedbackElement.textContent = 'Correct!';
-    feedbackElement.classList.add('correct-feedback');
-    feedbackElement.classList.remove('incorrect-feedback');
-  } else {
-    feedbackElement.textContent = 'Incorrect! Try again.';
-    feedbackElement.classList.add('incorrect-feedback');
-    feedbackElement.classList.remove('correct-feedback');
-  }
+  const feedbackClass = isCorrect ? 'correct-feedback' : 'incorrect-feedback';
+  const feedbackText = isCorrect ? 'Correct!' : 'Incorrect! Try again.';
+  
+  feedbackElement.textContent = feedbackText;
+  feedbackElement.classList.add(feedbackClass);
+  feedbackElement.classList.remove('incorrect-feedback', 'correct-feedback');
 }
 
-// Function to process user's guess
+// Process user's guess
 function processGuess(guess) {
   awardPoints();
 
@@ -89,7 +80,7 @@ function processGuess(guess) {
   }
 
   if (!validateGuess(guess)) {
-    feedbackElement.textContent = 'Invalid guess! Make sure you enter a ' + secretNumberDigits + '-digit number with no repeating digits, and without the digit 0.';
+    feedbackElement.textContent = `Invalid guess! Make sure you enter a ${secretNumberDigits}-digit number with no repeating digits, and without the digit 0.`;
     return;
   }
 
@@ -120,22 +111,19 @@ function processGuess(guess) {
   updateGuessTable();
 
   if (correctPlace === secretNumberDigits) {
+    checkGuess(true);
     if (step === 3) {
-      checkGuess(true);
       gameOver = true;
       alert('Congratulations! You have completed Stage 3.\nGame Over');
       showResult(totalScore);
       showNewGameButton();
     } else {
-      checkGuess(true);
       step++;
       document.getElementById('level').textContent = step;
-      alert('Correct guess! Proceed to Stage ' + step);
-
+      alert(`Correct guess! Proceed to Stage ${step}`);
+      
       secretNumberDigits++;
-      console.log("Updated secretNumberDigits:", secretNumberDigits);
       document.getElementById('digits').textContent = secretNumberDigits;
-      console.log("DOM content:", document.getElementById('digits').textContent);
 
       secretNumber = generateSecretNumber(secretNumberDigits);
       guesses = [];
@@ -148,24 +136,24 @@ function processGuess(guess) {
   }
 }
 
-// Function to update the guess table
+// Update the guess table
 function updateGuessTable() {
   guessTableBody.innerHTML = '';
 
   guesses.forEach((guessObj, index) => {
-    const newRow = document.createElement('tr');
-    newRow.innerHTML = `
+    const guessRow = document.createElement('tr');
+    guessRow.innerHTML = `
       <td>${index + 1}</td>
       <td>${guessObj.guess}</td>
       <td>${guessObj.correctPlace}</td>
       <td>${guessObj.correctDigits}</td>
       <td>${guessObj.incorrectDigits}</td>
     `;
-    guessTableBody.appendChild(newRow);
+    guessTableBody.appendChild(guessRow);
   });
 }
 
-// Function to provide a hint by revealing the first digit of the secret number
+// Provide a hint by revealing the first digit of the secret number
 function getHint() {
   if (hintUsed || gameOver) {
     return;
@@ -174,12 +162,13 @@ function getHint() {
   hintUsed = true;
   score += 50;
   const hintDigit = secretNumber[0];
-  alert('Hint: The first digit of the secret number is ' + hintDigit);
+  alert(`Hint: The first digit of the secret number is ${hintDigit}`);
   updateUI();
 }
 
-// Function to reveal the secret number (admin functionality)
-function revealSecretNumber() {
+// Reveal the secret number (admin functionality)
+function revealSecretNumber
+() {
   if (adminUsed || gameOver) {
     return;
   }
@@ -187,12 +176,12 @@ function revealSecretNumber() {
   adminUsed = true;
   score += 100;
   totalScore += 100;
-  const adminMessage = 'Admin: The secret number is ' + secretNumber + '\nScore: ' + score;
+  const adminMessage = `Admin: The secret number is ${secretNumber}\nScore: ${score}`;
   alert(adminMessage);
   updateUI();
 }
 
-// Function to start a new game
+// Start a new game
 function startNewGame() {
   step = 1;
   score = 0;
@@ -206,10 +195,8 @@ function startNewGame() {
   updateUI();
 }
 
-// Add event listener for the 'Get Hint' button
+// Add event listener for buttons
 hintButton.addEventListener('click', getHint);
-
-// Add event listener for the 'Admin' button
 adminButton.addEventListener('click', revealSecretNumber);
 
 // Add event listener for the 'Guess' button
