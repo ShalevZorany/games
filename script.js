@@ -118,6 +118,7 @@ function processGuess(guess) {
       showResult(totalScore);
       showNewGameButton();
     } else {
+      checkGuess(true);
       step++;
       document.getElementById('level').textContent = step;
       alert(`Correct guess! Proceed to Stage ${step}`);
@@ -167,8 +168,7 @@ function getHint() {
 }
 
 // Reveal the secret number (admin functionality)
-function revealSecretNumber
-() {
+function revealSecretNumber() {
   if (adminUsed || gameOver) {
     return;
   }
