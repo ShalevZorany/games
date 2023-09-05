@@ -152,7 +152,6 @@ function getHint() {
   alert('Hint: The first digit of the secret number is ' + hintDigit);
   document.getElementById('score').textContent = score;
 }
-
 // Function to reveal the secret number (admin functionality)
 function revealSecretNumber() {
   if (adminUsed || gameOver) {
