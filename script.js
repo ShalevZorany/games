@@ -56,7 +56,7 @@ function checkGuess(isCorrect) {
 }
 
 function processGuess(guess) {
-    // Add 10 points for every guess
+    // Add 10 points for every guess right at the start
     score += 10;
     document.getElementById('score').textContent = score;
 
