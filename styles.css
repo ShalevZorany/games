@@ -185,3 +185,15 @@ body {
   75% { transform: translateX(-10px); }
   100% { transform: translateX(0); }
 }
+.reset-button {
+    background-color: #4CAF50; /* צבע רקע ירוק */
+    border: none; /* ללא מסגרת */
+    color: white; /* טקסט לבן */
+    padding: 15px 32px; /* רווחים פנימיים */
+    text-align: center; /* יישור טקסט למרכז */
+    text-decoration: none; /* ללא קישוט טקסט */
+    display: inline-block; /* תצוגת בלוק צמודה */
+    font-size: 16px; /* גודל פונט */
+    margin: 4px 2px; /* מרווחים חיצוניים */
+    cursor: pointer; /* סמן ככפתור לחיצה */
+}
