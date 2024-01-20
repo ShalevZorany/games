@@ -204,6 +204,9 @@ function startNewGame() {
   adminUsed = false;
   gameOver = false;
   updateUI();
+    guessTableBody.innerHTML = ''; // אפס את תוכן הטבלה
+    updateUI(); // עדכן את ממשק המשתמש
+
 }
 
 // Add event listener for the 'Get Hint' button
@@ -221,3 +224,4 @@ document.getElementById('guessButton').addEventListener('click', () => {
 
 // Initialize the game
 startNewGame();
+document.getElementById('resetButton').addEventListener('click', startNewGame);
