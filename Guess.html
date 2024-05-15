@@ -1,107 +1,504 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Guess the Number</title>
-  <link rel="stylesheet" href="styles.css">
-    <!-- Google Analytics tracking code snippet -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NBHLS7ZNH6"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: url('https://i.ibb.co/B3RHLC9/B8-B15525-9422-47-D2-A582-530-CF4888790.jpg') no-repeat center center fixed;
+      background-size: cover;
+    }
 
-    gtag('config', 'G-NBHLS7ZNH6');
-  </script>
+    .game-container {
+      max-width: 600px;
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      box-sizing: border-box;
+    }
 
-</head>
+    .game-title {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+    }
 
-<body>
-  <div class="game-container">
-    <h1 class="game-title">Guess the Number</h1>
-    
-    <div class="rules-container">
-<div class="rules">
-  <h2>Game Description:</h2>
-  <p>Welcome to Guess the Number! In this game, your goal is to find out the secret number at each stage and achieve the lowest score possible.</p>
-  <p>The game rules are as follows:</p>
-  <ul>
-    <li>Enter a guess in the input field provided. The guess should be a numeric value between 1 and 9 (inclusive).</li>
-    <li>Each guess earns you 10 points, regardless of whether it is correct or not.</li>
-    <li>Avoid guessing the number 0.</li>
-    <li>Using the 'Get Hint' button gives you 50 points and provides a hint to help you in guessing the number.</li>
-    <li>Using the 'Admin' button reveals the secret number and gives you 100 points.</li>
-  </ul>
-  <p>Explanation of the Score:</p>
-  <ul>
-    <li>For each guess you make, whether correct or not, your score increases by 10 points.</li>
-    <li>Using the 'Get Hint' button gives you 50 points.</li>
-    <li>Using the 'Admin' button reveals the secret number and gives you 100 points.</li>
-    <li>The final score is calculated based on the total points earned throughout the game. Aim to achieve the lowest score possible.</li>
-  </ul>
-</div>
-    </div>
-    </div>
-    
-    <div class="game-info">
-      <p>Level: <span id="level">1</span></p>
-      <p>Score: <span id="score">0</span></p>
-      <p>Secret number digits: <span id="digits">3</span></p>
-      <p>Your guess digits: <span id="guessDigits">0</span></p>
-    </div>
-    
-    <div class="input-container">
-<input id="guessInput" type="text" placeholder="Enter your guess" style="touch-action: manipulation;">
-      <button id="guessButton" class="submit-button">Guess</button>
-      <button id="hintButton" class="hint-button">Get Hint</button>
-      <button id="adminButton" class="admin-button">Admin</button>
- <button id="resetButton" class="reset-button">Reset Game</button>
-    </div>
-    <div id="feedback" class="feedback"></div>
+    .rules-container {
+      margin-bottom: 20px;
+    }
 
-    <div class="game-table">
-      <h2>Previous Guesses</h2>
-      <table id="guessTable">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Guess</th>
-            <th>Correct Place</th>
-            <th>Correct Digits</th>
-            <th>Incorrect Digits</th>
-          </tr>
-        </thead>
-        <tbody id="guessTableBody">
-        </tbody>
-      </table>
-    </div>
-    
-    <div id="result"></div>
-    <button id="newGameButton" style="display: none;">New Game</button>
-    
-    <div class="footer">
-      <p>Created by Shalev Zorany</p>
-      <div>
-        <a href="https://www.facebook.com/shalev.zorany/" target="_blank">Visit my Facebook page</a>
-      </div>
-      <div>
-        <a href="https://twitter.com/ZoranyShalev" target="_blank">Follow me on Twitter</a>
-      </div>
-      <div>
-        <a href="https://www.instagram.com/shalevzorany/" target="_blank">Follow me on Instagram</a>
-      </div>
-      <div>
-        <a href="https://www.tiktok.com/@shalevzoranyapple" target="_blank">Follow me on TikTok</a>
-      </div>
-      <div>
-        <a href="https://www.threads.net/@shalevzorany" target="_blank">Follow me on Threads</a>
-      </div>
-    </div>
-  </div>
-  
-  <script src="script.js"></script>
-</body>
+    .rules {
+      color: #666;
+    }
+‏    .game-info {
+‏      display: flex;
+‏      justify-content: space-between;
+‏      margin-bottom: 20px;
+    }
 
-</html>
+‏    .input-container {
+‏      display: flex;
+‏      flex-direction: column;
+‏      align-items: center;
+    }
+
+‏    .number-buttons {
+‏      display: flex;
+‏      flex-wrap: wrap;
+‏      justify-content: center;
+‏      margin-bottom: 10px;
+    }
+
+‏    .number-button {
+‏      padding: 10px;
+‏      margin: 5px;
+‏      width: 50px;
+‏      height: 50px;
+‏      border: none;
+‏      border-radius: 5px;
+‏      background-color: #007bff;
+‏      color: #fff;
+‏      font-size: 20px;
+‏      cursor: pointer;
+    }
+
+‏    .submit-button, .hint-button, .admin-button, .reset-button, .delete-button {
+‏      padding: 10px 20px;
+‏      margin: 5px;
+‏      width: 100%;
+‏      border: none;
+‏      border-radius: 5px;
+‏      color: #fff;
+‏      cursor: pointer;
+‏      font-size: 16px;
+    }
+
+‏    .submit-button {
+‏      background-color: #28a745;
+    }
+
+‏    .hint-button {
+‏      background-color: #ffc107;
+    }
+
+‏    .admin-button {
+‏      background-color: #17a2b8;
+    }
+
+‏    .reset-button {
+‏      background-color: #dc3545;
+    }
+
+‏    .delete-button {
+‏      background-color: #6c757d;
+    }
+
+‏    .feedback {
+‏      text-align: center;
+‏      margin-top: 20px;
+‏      color: #d9534f;
+‏      font-weight: bold;
+    }
+
+‏    .game-table {
+‏      margin-top: 20px;
+    }
+
+‏    .game-table table {
+‏      width: 100%;
+‏      border-collapse: collapse;
+    }
+
+‏    .game-table th, .game-table td {
+‏      padding: 10px;
+‏      border: 1px solid #ddd;
+‏      text-align: center;
+    }
+
+‏    .footer {
+‏      text-align: center;
+‏      margin-top: 20px;
+    }
+
+‏    .footer a {
+‏      display: block;
+‏      color: #007bff;
+‏      text-decoration: none;
+    }
+
+‏    .footer a:hover {
+‏      text-decoration: underline;
+    }
+
+‏    /* Media Queries for Mobile View */
+‏    @media (max-width: 768px) {
+‏      .number-buttons, .submit-button, .hint-button, .admin-button, .reset-button, .delete-button {
+‏        width: 100%;
+      }
+
+‏      .number-button {
+‏        width: 20%;
+      }
+    }
+
+‏    /* Additional Colors */
+‏    .correct-feedback {
+‏      color: #28a745;
+    }
+
+‏    .incorrect-feedback {
+‏      color: #dc3545;
+    }
+‏  </style>
+‏</head>
+‏<body>
+‏  <div class="game-container">
+‏    <h1 class="game-title">Guess the Number</h1>
+‏    <div class="rules-container">
+‏      <div class="rules">
+‏        <h2>Game Description:</h2>
+‏        <p>Welcome to Guess the Number! In this game, your goal is to find out the secret number at each stage and achieve the lowest score possible.</p>
+‏        <p>The game rules are as follows:</p>
+‏        <ul>
+‏          <li>Enter a guess by clicking the buttons below. The guess should be a numeric value between 1 and 9 (inclusive).</li>
+‏          <li>Each guess earns you 10 points, regardless of whether it is correct or not.</li>
+‏          <li>Avoid guessing the number 0.</li>
+‏          <li>Using the 'Get Hint' button gives you 50 points and provides a hint to help you in guessing the number.</li>
+‏          <li>Using the 'Admin' button reveals the secret number and gives you 100 points.</li>
+‏        </ul>
+‏        <p>Explanation of the Score:</p>
+‏        <ul>
+‏          <li>For each guess you make, whether correct or not, your score increases by 10 points.</li>
+‏          <li>Using the 'Get Hint' button gives you 50 points.</li>
+‏          <li>Using the 'Admin' button reveals the secret number and gives you 100 points.</li>
+‏          <li>The final score is calculated based on the total points earned throughout the game. Aim to achieve the lowest score possible.</li>
+‏        </ul>
+‏      </div>
+‏    </div>
+
+‏    <div class="game-info">
+‏      <p>Level: <span id="level">1</span></p>
+‏      <p>Score: <span id="score">0</span></p>
+‏      <p>Secret number digits: <span id="digits">3</span></p>
+‏      <p>Your guess: <span id="guessDisplay"></span></p>
+‏    </div>
+‏    <div class="input-container">
+‏      <div class="number-buttons">
+‏        <button class="number-button" onclick="addDigit(1)">1</button>
+‏        <button class="number-button" onclick="addDigit(2)">2</button>
+‏        <button class="number-button" onclick="addDigit(3)">3</button>
+‏        <button class="number-button" onclick="addDigit(4)">4</button>
+‏        <button class="number-button" onclick="addDigit(5)">5</button>
+‏        <button class="number-button" onclick="addDigit(6)">6</button>
+‏        <button class="number-button" onclick="addDigit(7)">7</button>
+‏        <button class="number-button" onclick="addDigit(8)">8</button>
+‏        <button class="number-button" onclick="addDigit(9)">9</button>
+‏      </div>
+‏      <button id="deleteButton" class="delete-button">Delete Last Digit</button>
+‏      <button id="guessButton" class="submit-button">Guess</button>
+‏      <button id="hintButton" class="hint-button">Get Hint</button>
+‏      <button id="adminButton" class="admin-button">Admin</button>
+‏      <button id="resetButton" class="reset-button">Reset Game</button>
+‏    </div>
+
+‏    <div id="feedback" class="feedback"></div>
+
+‏    <div class="game-table">
+‏      <h2>Previous Guesses</h2>
+‏      <table id="guessTable">
+‏        <thead>
+‏          <tr>
+‏            <th>#</th>
+‏            <th>Guess</th>
+‏            <th>Correct Place</th>
+‏            <th>Correct Digits</th>
+‏            <th>Incorrect Digits</th>
+‏          </tr>
+‏        </thead>
+‏        <tbody id="guessTableBody">
+‏        </tbody>
+‏      </table>
+‏    </div>
+
+‏    <div id="result"></div>
+‏    <button id="newGameButton" style="display: none;">New Game</button>
+
+‏    <div class="footer">
+‏      <p>Created by Shalev Zorany</p>
+‏      <div>
+‏        <a href="https://www.facebook.com/shalev.zorany/" target="_blank">Visit my Facebook page</a>
+‏      </div>
+‏      <div>
+‏        <a href="https://twitter.com/ZoranyShalev" target="_blank">Follow me on Twitter</a>
+‏      </div>
+‏      <div>
+‏        <a href="https://www.instagram.com/shalevzorany/" target="_blank">Follow me on Instagram</a>
+‏      </div>
+‏      <div>
+‏        <a href="https://www.tiktok.com/@shalevzoranyapple" target="_blank">Follow me on TikTok</a>
+‏      </div>
+‏      <div>
+‏        <a href="https://www.threads.net/@shalevzorany" target="_blank">Follow me on Threads</a>
+‏      </div>
+‏    </div>
+‏  </div>
+‏</body>
+‏  <script>
+‏    // Initialize game variables
+‏    let step = 1;
+‏    let score = 0;
+‏    let totalScore = 0;
+‏    let secretNumberDigits = 3;
+‏    let secretNumber = generateSecretNumber(secretNumberDigits);
+‏    let guesses = [];
+‏    let currentGuess = '';
+‏    let hintUsed = false;
+‏    let adminUsed = false;
+‏    let gameOver = false;
+
+‏    // DOM elements
+‏    const levelElement = document.getElementById('level');
+‏    const scoreElement = document.getElementById('score');
+‏    const digitsElement = document.getElementById('digits');
+‏    const guessDisplay = document.getElementById('guessDisplay');
+‏    const guessTableBody = document.getElementById('guessTableBody');
+‏    const feedbackElement = document.getElementById('feedback');
+‏    const hintButton = document.getElementById('hintButton');
+‏    const adminButton = document.getElementById('adminButton');
+
+‏    // Function to generate a random secret number with the specified number of digits
+‏    function generateSecretNumber(digits) {
+‏      let number = '';
+‏      const digitsArray = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
+‏      while (number.length < digits) {
+‏        const randomIndex = Math.floor(Math.random() * digitsArray.length);
+‏        const digit = digitsArray[randomIndex];
+
+‏        if (!number.includes(digit)) {
+‏          number += digit;
+        }
+      }
+
+‏      return number;
+    }
+
+‏    // Function to validate the user's guess
+‏    function validateGuess(guess) {
+‏      if (guess.length !== secretNumberDigits) {
+‏        return false;
+      }
+‏      if (new Set(guess).size !== secretNumberDigits) {
+‏        return false;
+      }
+‏      if (guess.includes('0')) {
+‏        return false;
+      }
+‏      return true;
+    }
+
+‏    // Function to update UI elements
+‏    function updateUI() {
+‏      levelElement.textContent = step;
+‏      scoreElement.textContent = score;
+‏      digitsElement.textContent = secretNumberDigits;
+‏      guessDisplay.textContent = currentGuess;
+‏      feedbackElement.textContent = '';
+‏      hintButton.disabled = hintUsed || gameOver;
+‏      adminButton.disabled = adminUsed || gameOver;
+    }
+
+‏    // Function to award points for guessing
+‏    function awardPoints() {
+‏      score += 10;
+‏      updateUI();
+    }
+
+‏    // Function to check if the guess is correct
+‏    function checkGuess(isCorrect) {
+‏      if (isCorrect) {
+‏        feedbackElement.textContent = 'Correct!';
+‏        feedbackElement.classList.add('correct-feedback');
+‏        feedbackElement.classList.remove('incorrect-feedback');
+‏      } else {
+‏        feedbackElement.textContent = 'Incorrect! Try again.';
+‏        feedbackElement.classList.add('incorrect-feedback');
+‏        feedbackElement.classList.remove('correct-feedback');
+      }
+    }
+
+‏    // Function to process user's guess
+‏    function processGuess(guess) {
+‏      awardPoints();
+
+‏      if (gameOver) {
+‏        return;
+      }
+
+‏      if (!validateGuess(guess)) {
+‏        feedbackElement.textContent = 'Invalid guess! Make sure you enter a ' + secretNumberDigits + '-digit number with no repeating digits, and without the digit 0.';
+‏        return;
+      }
+
+‏      let correctPlace = 0;
+‏      let correctDigits = 0;
+‏      let incorrectDigits = 0;
+
+‏      for (let i = 0; i < secretNumber.length; i++) {
+‏        const secretDigit = secretNumber[i];
+‏        const guessDigit = guess[i];
+
+‏        if (secretDigit === guessDigit) {
+‏          correctPlace++;
+‏        } else if (secretNumber.includes(guessDigit)) {
+‏          correctDigits++;
+‏        } else {
+‏          incorrectDigits++;
+        }
+      }
+
+‏      guesses.push({
+‏        guess: guess,
+‏        correctPlace: correctPlace,
+‏        correctDigits: correctDigits,
+‏        incorrectDigits: incorrectDigits
+      });
+
+‏      updateGuessTable();
+
+‏      if (correctPlace === secretNumberDigits) {
+‏        if (step === 3) {
+‏          checkGuess(true);
+‏          gameOver = true;
+‏          alert('Congratulations! You have completed Stage 3.\nGame Over');
+‏          showResult(totalScore);
+‏          showNewGameButton();
+‏        } else {
+‏          checkGuess(true);
+‏          step++;
+‏          document.getElementById('level').textContent = step;
+‏          alert('Correct guess! Proceed to Stage ' + step);
+
+‏          secretNumberDigits++;
+‏          document.getElementById('digits').textContent = secretNumberDigits;
+
+‏          secretNumber = generateSecretNumber(secretNumberDigits);
+‏          guesses = [];
+‏          hintUsed = false;
+‏          adminUsed = false;
+‏          document.getElementById('guessTableBody').innerHTML = '';
+        }
+‏      } else {
+‏        checkGuess(false);
+      }
+
+‏      currentGuess = '';
+‏      updateUI();
+    }
+
+‏    // Function to update the guess table
+‏    function updateGuessTable() {
+‏      guessTableBody.innerHTML = '';
+
+‏      guesses.forEach((guessObj, index) => {
+‏        const newRow = document.createElement('tr');
+‏        newRow.innerHTML = `
+‏          <td>${index + 1}</td>
+‏          <td>${guessObj.guess}</td>
+‏          <td>${guessObj.correctPlace}</td>
+‏          <td>${guessObj.correctDigits}</td>
+‏          <td>${guessObj.incorrectDigits}</td>
+        `;
+‏        guessTableBody.appendChild(newRow);
+      });
+    }
+
+‏    // Function to provide a hint by revealing the first digit of the secret number
+‏    function getHint() {
+‏      if (hintUsed || gameOver) {
+‏        return;
+      }
+
+‏      hintUsed = true;
+‏      score += 50;
+‏      const hintDigit = secretNumber[0];
+‏      alert('Hint: The first digit of the secret number is ' + hintDigit);
+‏      updateUI();
+    }
+
+‏    // Function to reveal the secret number (admin functionality)
+‏    function revealSecretNumber() {
+‏      if (adminUsed || gameOver) {
+‏        return;
+      }
+
+‏      adminUsed = true;
+‏      score += 100;
+‏      totalScore += 100;
+‏      const adminMessage = 'Admin: The secret number is ' + secretNumber + '\nScore: ' + score;
+‏      alert(adminMessage);
+‏      updateUI();
+    }
+
+‏    // Function to start a new game
+‏    function startNewGame() {
+‏      step = 1;
+‏      score = 0;
+‏      totalScore = 0;
+‏      secretNumberDigits = 3;
+‏      secretNumber = generateSecretNumber(secretNumberDigits);
+‏      guesses = [];
+‏      hintUsed = false;
+‏      adminUsed = false;
+‏      gameOver = false;
+‏      currentGuess = '';
+‏      updateUI();
+‏      guessTableBody.innerHTML = '';
+    }
+
+‏    // Function to add digit to current guess
+‏    function addDigit(digit) {
+‏      if (currentGuess.length < secretNumberDigits && !currentGuess.includes(digit)) {
+‏        currentGuess += digit;
+      }
+‏      updateUI();
+    }
+
+‏    // Function to delete the last digit from the current guess
+‏    function deleteLastDigit() {
+‏      currentGuess = currentGuess.slice(0, -1);
+‏      updateUI();
+    }
+
+‏    // Add event listener for the 'Guess' button
+‏    document.getElementById('guessButton').addEventListener('click', () => {
+‏      processGuess(currentGuess);
+    });
+
+‏    // Add event listener for the 'Delete Last Digit' button
+‏    document.getElementById('deleteButton').addEventListener('click', deleteLastDigit);
+
+‏    // Add event listener for the 'Get Hint' button
+‏    hintButton.addEventListener('click', getHint);
+
+‏    // Add event listener for the 'Admin' button
+‏    adminButton.addEventListener('click', revealSecretNumber);
+
+‏    // Add event listener for the 'Reset Game' button
+‏    document.getElementById('resetButton').addEventListener('click', startNewGame);
+
+‏    // Initialize the game
+‏    startNewGame();
+‏  </script>
+‏</html>
+```
