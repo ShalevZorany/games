@@ -1,0 +1,155 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: url('https://i.ibb.co/B3RHLC9/B8-B15525-9422-47-D2-A582-530-CF4888790.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+.game-container {
+  max-width: 600px;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.game-title {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.rules-container {
+  margin-bottom: 20px;
+}
+
+.rules {
+  color: #666;
+}
+
+.game-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.number-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.number-button {
+  padding: 10px;
+  margin: 5px;
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.submit-button, .hint-button, .admin-button, .reset-button, .delete-button {
+  padding: 10px 20px;
+  margin: 5px;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.submit-button {
+  background-color: #28a745;
+}
+
+.hint-button {
+  background-color: #ffc107;
+}
+
+.admin-button {
+  background-color: #17a2b8;
+}
+
+.reset-button {
+  background-color: #dc3545;
+}
+
+.delete-button {
+  background-color: #6c757d;
+}
+
+.feedback {
+  text-align: center;
+  margin-top: 20px;
+  color: #d9534f;
+  font-weight: bold;
+}
+
+.game-table {
+  margin-top: 20px;
+}
+
+.game-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.game-table th, .game-table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.footer a {
+  display: block;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+/* Media Queries for Mobile View */
+@media (max-width: 768px) {
+  .number-buttons, .submit-button, .hint-button, .admin-button, .reset-button, .delete-button {
+    width: 100%;
+  }
+
+  .number-button {
+    width: 20%;
+  }
+}
+
+/* Additional Colors */
+.correct-feedback {
+  color: #28a745;
+}
+
+.incorrect-feedback {
+  color: #dc3545;
+}
