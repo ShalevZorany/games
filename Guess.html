@@ -45,7 +45,6 @@
     .game-info {
       display: flex;
       flex-direction: column;
-      margin-bottom: 20px;
       gap: 10px;
     }
     .game-info p {
@@ -54,17 +53,36 @@
       text-align: center;
     }
 
+    .game-table {
+      width: 100%;
+      max-height: 300px;
+      overflow-y: auto;
+      margin-top: 10px;
+    }
+
+    .guess-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .guess-table th, .guess-table td {
+      border: 1px solid #ddd;
+      padding: 15px;
+      text-align: center;
+      font-size: 16px;
+    }
+    .guess-table th {
+      background-color: #f8f8f8;
+    }
+
     .number-buttons {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      margin-bottom: 10px;
       gap: 15px;
     }
 
     .number-button {
-      padding: 15px;
-      margin: 0;
+      padding: 10px;
       width: 70px;
       height: 70px;
       border: none;
@@ -73,11 +91,11 @@
       color: #fff;
       font-size: 28px;
       cursor: pointer;
-      transition: transform 0.1s ease, background-color 0.3s ease;
+      transition: transform 0.05s ease, background-color 0.3s ease;
     }
 
     .number-button:active {
-      transform: scale(0.95);
+      transform: scale(0.97);
     }
 
     .button {
@@ -99,9 +117,9 @@
     .submit-button { background-color: #28a745; }
     .hint-button { background-color: #ffc107; }
     .reset-button { background-color: #dc3545; }
-    .delete-button { background-color: #6c757d; }
     .difficulty-button { background-color: #007bff; }
     .timer-button { background-color: #20c997; }
+    .delete-button { background-color: #6c757d; padding: 10px; width: 70px; height: 70px; }
 
     .feedback {
       text-align: center;
@@ -112,37 +130,6 @@
     }
     .correct-feedback { color: #28a745; }
     .incorrect-feedback { color: #dc3545; }
-
-    .shake {
-      animation: shake 0.3s ease-in-out;
-    }
-    @keyframes shake {
-      0%, 100% { transform: translateX(0); }
-      25% { transform: translateX(-5px); }
-      50% { transform: translateX(5px); }
-      75% { transform: translateX(-5px); }
-    }
-
-    .game-table {
-      width: 100%;
-      max-height: 300px;
-      overflow-y: auto;
-      margin-top: 20px;
-    }
-
-    .guess-table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    .guess-table th, .guess-table td {
-      border: 1px solid #ddd;
-      padding: 15px;
-      text-align: center;
-      font-size: 16px;
-    }
-    .guess-table th {
-      background-color: #f8f8f8;
-    }
   </style>
 </head>
 <body>
@@ -158,27 +145,6 @@
       <p>Your guess: <span id="guessDisplay"></span></p>
       <p>Time Remaining: <span id="timer">60</span> seconds</p>
     </div>
-    <div class="input-container">
-      <button id="guessButton" class="button submit-button" onclick="processGuess()">Guess</button>
-    </div>
-    <div class="number-buttons">
-      <button class="number-button" onclick="addDigit(1)">1</button>
-      <button class="number-button" onclick="addDigit(2)">2</button>
-      <button class="number-button" onclick="addDigit(3)">3</button>
-      <button class="number-button" onclick="addDigit(4)">4</button>
-      <button class="number-button" onclick="addDigit(5)">5</button>
-      <button class="number-button" onclick="addDigit(6)">6</button>
-      <button class="number-button" onclick="addDigit(7)">7</button>
-      <button class="number-button" onclick="addDigit(8)">8</button>
-      <button class="number-button" onclick="addDigit(9)">9</button>
-    </div>
-    <div class="input-container">
-      <button id="deleteButton" class="button delete-button" onclick="deleteLastDigit()">Delete Last Digit</button>
-      <button id="hintButton" class="button hint-button" onclick="getHint()">Get Hint</button>
-      <button id="resetButton" class="button reset-button" onclick="resetGame()">Reset Game</button>
-      <button id="difficultyButton" class="button difficulty-button" onclick="changeDifficulty()">Change Difficulty</button>
-      <button id="timerButton" class="button timer-button" onclick="toggleTimer()">Start/Stop Timer</button>
-    </div>
     <div class="game-table">
       <h2>Previous Guesses</h2>
       <table class="guess-table">
@@ -193,6 +159,28 @@
         <tbody id="guessTableBody">
         </tbody>
       </table>
+    </div>
+    <div class="number-buttons">
+      <button class="number-button" onclick="addDigit(1)">1</button>
+      <button class="number-button" onclick="addDigit(2)">2</button>
+      <button class="number-button" onclick="addDigit(3)">3</button>
+      <button class="number-button" onclick="addDigit(4)">4</button>
+      <button class="number-button" onclick="addDigit(5)">5</button>
+      <button class="number-button" onclick="addDigit(6)">6</button>
+      <button class="number-button" onclick="addDigit(7)">7</button>
+      <button class="number-button" onclick="addDigit(8)">8</button>
+      <button class="number-button" onclick="addDigit(9)">9</button>
+      <button id="deleteButton" class="number-button delete-button" onclick="deleteLastDigit()">⌫</button>
+    </div>
+    <div class="input-container">
+      <button id="guessButton" class="button submit-button" onclick="processGuess()">Guess</button>
+      <button id="hintButton" class="button hint-button" onclick="getHint()">Get Hint</button>
+      <button id="resetButton" class="button reset-button" onclick="resetGame()">Reset Game</button>
+      <select id="difficultySelect" class="button difficulty-button" onchange="changeDifficulty()">
+        <option value="Easy">Easy</option>
+        <option value="Hard">Hard</option>
+      </select>
+      <button id="timerButton" class="button timer-button" onclick="toggleTimer()">Start/Stop Timer</button>
     </div>
     <div id="feedback" class="feedback"></div>
   </div>
@@ -222,7 +210,7 @@
     }
 
     function addDigit(digit) {
-      if (currentGuess.length < decryptedSecret.length) {
+      if (currentGuess.length < decryptedSecret.length && !currentGuess.includes(digit)) {
         currentGuess += digit;
         document.getElementById("guessDisplay").textContent = currentGuess;
       }
@@ -319,11 +307,11 @@
     }
 
     function changeDifficulty() {
-      if (difficulty === "Easy") {
-        difficulty = "Hard";
+      const difficultySelect = document.getElementById("difficultySelect");
+      difficulty = difficultySelect.value;
+      if (difficulty === "Hard") {
         secretNumber = generateEncryptedSecretNumber(decryptedSecret.length + 1);
       } else {
-        difficulty = "Easy";
         secretNumber = generateEncryptedSecretNumber(3);
       }
       decryptedSecret = atob(secretNumber);
