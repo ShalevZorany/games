@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // אירועי לחצנים
   document.querySelectorAll('.number-button').forEach(button => {
-    button.addEventListener('click', () => {
+    button.addEventListener('pointerdown', () => {
       const digit = button.getAttribute('data-digit');
       if (digit) {
         addDigit(digit);
@@ -92,6 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (correctPlace === secretNumber.length) {
         feedback.textContent = 'כל הכבוד! ניחשת את המספר הסודי!';
         feedback.classList.add('correct-feedback');
+        feedback.classList.remove('incorrect-feedback');
         score += 100;
         level++;
         levelDisplay.textContent = level;
@@ -139,6 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
     history = [];
     guessDisplay.textContent = currentGuess;
     feedback.textContent = '';
+    feedback.classList.remove('correct-feedback', 'incorrect-feedback');
     guessTableBody.innerHTML = '';
     scoreDisplay.textContent = score;
     levelDisplay.textContent = level;
