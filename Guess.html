@@ -1,159 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="he">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Guess the Number</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      background: #f0f0f0;
-    }
-
-    .game-container {
-      width: 95%;
-      max-width: 600px;
-      background-color: rgba(255, 255, 255, 0.9);
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      padding: 20px;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .game-title {
-      text-align: center;
-      color: #333;
-      margin-bottom: 20px;
-      font-size: 2em;
-    }
-
-    .rules-container {
-      margin-bottom: 20px;
-      color: #666;
-      text-align: center;
-    }
-
-    .game-info {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .game-info p {
-      margin: 0;
-      font-size: 1.2em;
-      text-align: center;
-    }
-
-    .game-table {
-      width: 100%;
-      max-height: 300px;
-      overflow-y: auto;
-      margin-top: 10px;
-    }
-
-    .guess-table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    .guess-table th, .guess-table td {
-      border: 1px solid #ddd;
-      padding: 15px;
-      text-align: center;
-      font-size: 16px;
-    }
-    .guess-table th {
-      background-color: #f8f8f8;
-    }
-
-    .number-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-    }
-
-    .number-button {
-      padding: 10px;
-      width: 70px;
-      height: 70px;
-      border: none;
-      border-radius: 10px;
-      background-color: #007bff;
-      color: #fff;
-      font-size: 28px;
-      cursor: pointer;
-      transition: transform 0.05s ease, background-color 0.3s ease;
-    }
-
-    .number-button:active {
-      transform: scale(0.97);
-    }
-
-    .button {
-      padding: 15px 20px;
-      margin: 5px;
-      width: 100%;
-      border: none;
-      border-radius: 5px;
-      color: #fff;
-      cursor: pointer;
-      font-size: 18px;
-      transition: background-color 0.3s ease;
-    }
-
-    .button:hover {
-      opacity: 0.9;
-    }
-
-    .submit-button { background-color: #28a745; }
-    .hint-button { background-color: #ffc107; }
-    .reset-button { background-color: #dc3545; }
-    .difficulty-button { background-color: #007bff; }
-    .timer-button { background-color: #20c997; }
-    .delete-button { background-color: #6c757d; padding: 10px; width: 70px; height: 70px; }
-
-    .feedback {
-      text-align: center;
-      margin-top: 20px;
-      color: #d9534f;
-      font-weight: bold;
-      font-size: 1.2em;
-    }
-    .correct-feedback { color: #28a745; }
-    .incorrect-feedback { color: #dc3545; }
-  </style>
+  <title>נחש את המספר</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="game-container">
-    <h1 class="game-title">Guess the Number</h1>
+    <h1 class="game-title">נחש את המספר</h1>
     <div class="rules-container">
-      <p>Welcome to Guess the Number! In this game, your goal is to find out the secret number at each stage and achieve the lowest score possible.</p>
+      <p>ברוכים הבאים למשחק "נחש את המספר"! המטרה היא לגלות את המספר הסודי בכל שלב ולהשיג את הניקוד הנמוך ביותר.</p>
     </div>
     <div class="game-info">
-      <p>Level: <span id="level">1</span></p>
-      <p>Score: <span id="score">0</span></p>
-      <p>Secret number digits: <span id="digits">3</span></p>
-      <p>Your guess: <span id="guessDisplay"></span></p>
-      <p>Time Remaining: <span id="timer">60</span> seconds</p>
+      <p>רמה: <span id="level">1</span></p>
+      <p>ניקוד: <span id="score">0</span></p>
+      <p>ספרות במספר הסודי: <span id="digits">3</span></p>
+      <p>הניחוש שלך: <span id="guessDisplay"></span></p>
+      <p>זמן שנותר: <span id="timer">60</span> שניות</p>
     </div>
     <div class="game-table">
-      <h2>Previous Guesses</h2>
+      <h2>ניחושים קודמים</h2>
       <table class="guess-table">
         <thead>
           <tr>
-            <th>Guess</th>
-            <th>Correct Place</th>
-            <th>Correct Digit (Wrong Place)</th>
-            <th>Incorrect Digits</th>
+            <th>ניחוש</th>
+            <th>במקום הנכון</th>
+            <th>ספרה נכונה (מקום שגוי)</th>
+            <th>ספרות שגויות</th>
           </tr>
         </thead>
         <tbody id="guessTableBody">
@@ -161,180 +34,31 @@
       </table>
     </div>
     <div class="number-buttons">
-      <button class="number-button" onclick="addDigit(1)">1</button>
-      <button class="number-button" onclick="addDigit(2)">2</button>
-      <button class="number-button" onclick="addDigit(3)">3</button>
-      <button class="number-button" onclick="addDigit(4)">4</button>
-      <button class="number-button" onclick="addDigit(5)">5</button>
-      <button class="number-button" onclick="addDigit(6)">6</button>
-      <button class="number-button" onclick="addDigit(7)">7</button>
-      <button class="number-button" onclick="addDigit(8)">8</button>
-      <button class="number-button" onclick="addDigit(9)">9</button>
-      <button id="deleteButton" class="number-button delete-button" onclick="deleteLastDigit()">⌫</button>
+      <!-- כפתורי מספרים מ-1 עד 9 -->
+      <div class="number-button" data-digit="1">1</div>
+      <div class="number-button" data-digit="2">2</div>
+      <div class="number-button" data-digit="3">3</div>
+      <div class="number-button" data-digit="4">4</div>
+      <div class="number-button" data-digit="5">5</div>
+      <div class="number-button" data-digit="6">6</div>
+      <div class="number-button" data-digit="7">7</div>
+      <div class="number-button" data-digit="8">8</div>
+      <div class="number-button" data-digit="9">9</div>
+      <div id="deleteButton" class="number-button delete-button">⌫</div>
     </div>
     <div class="input-container">
-      <button id="guessButton" class="button submit-button" onclick="processGuess()">Guess</button>
-      <button id="hintButton" class="button hint-button" onclick="getHint()">Get Hint</button>
-      <button id="resetButton" class="button reset-button" onclick="resetGame()">Reset Game</button>
-      <select id="difficultySelect" class="button difficulty-button" onchange="changeDifficulty()">
-        <option value="Easy">Easy</option>
-        <option value="Hard">Hard</option>
+      <button id="guessButton" class="button submit-button">נחש</button>
+      <button id="hintButton" class="button hint-button">קבל רמז</button>
+      <button id="resetButton" class="button reset-button">אפס משחק</button>
+      <select id="difficultySelect" class="button difficulty-button">
+        <option value="Easy">קל</option>
+        <option value="Hard">קשה</option>
       </select>
-      <button id="timerButton" class="button timer-button" onclick="toggleTimer()">Start/Stop Timer</button>
+      <button id="timerButton" class="button timer-button">הפעל/הפסק טיימר</button>
     </div>
     <div id="feedback" class="feedback"></div>
   </div>
 
-  <script>
-    let currentGuess = "";
-    let secretNumber = generateEncryptedSecretNumber(3);
-    let score = 0;
-    let level = 1;
-    let decryptedSecret = atob(secretNumber);
-    let statistics = { totalGuesses: 0, totalHints: 0, gamesPlayed: 0, totalTime: 0 };
-    let difficulty = "Easy";
-    let timer;
-    let timeRemaining = 60;
-    let history = [];
-    let timerRunning = false;
-
-    function generateEncryptedSecretNumber(digits) {
-      let numbers = [];
-      while (numbers.length < digits) {
-        let randomDigit = Math.floor(Math.random() * 9) + 1;
-        if (!numbers.includes(randomDigit)) {
-          numbers.push(randomDigit);
-        }
-      }
-      return btoa(numbers.join(""));
-    }
-
-    function addDigit(digit) {
-      if (currentGuess.length < decryptedSecret.length && !currentGuess.includes(digit)) {
-        currentGuess += digit;
-        document.getElementById("guessDisplay").textContent = currentGuess;
-      }
-    }
-
-    function deleteLastDigit() {
-      currentGuess = currentGuess.slice(0, -1);
-      document.getElementById("guessDisplay").textContent = currentGuess;
-    }
-
-    function processGuess() {
-      if (currentGuess.length === decryptedSecret.length) {
-        let correctPlace = 0;
-        let correctDigit = 0;
-        let incorrectDigit = 0;
-
-        for (let i = 0; i < currentGuess.length; i++) {
-          if (currentGuess[i] === decryptedSecret[i]) {
-            correctPlace++;
-          } else if (decryptedSecret.includes(currentGuess[i])) {
-            correctDigit++;
-          } else {
-            incorrectDigit++;
-          }
-        }
-
-        const guessTableBody = document.getElementById("guessTableBody");
-        const newRow = document.createElement("tr");
-        newRow.innerHTML = `
-          <td>${currentGuess}</td>
-          <td>${correctPlace}</td>
-          <td>${correctDigit}</td>
-          <td>${incorrectDigit}</td>
-        `;
-        guessTableBody.appendChild(newRow);
-
-        history.push({ guess: currentGuess, correctPlace, correctDigit, incorrectDigit });
-        statistics.totalGuesses++;
-
-        if (correctPlace === decryptedSecret.length) {
-          document.getElementById("feedback").textContent = "Congratulations! You've guessed the secret number!";
-          document.getElementById("feedback").classList.add("correct-feedback");
-          score += 100;
-          level++;
-          document.getElementById("level").textContent = level;
-          secretNumber = generateEncryptedSecretNumber(decryptedSecret.length + 1);
-          decryptedSecret = atob(secretNumber);
-          statistics.gamesPlayed++;
-          resetCurrentGuess();
-        } else {
-          document.getElementById("feedback").textContent = "Incorrect guess. Try again!";
-          document.getElementById("feedback").classList.add("incorrect-feedback");
-          score -= 10;
-        }
-        document.getElementById("score").textContent = score;
-        resetCurrentGuess();
-      } else {
-        document.getElementById("feedback").textContent = "Please enter a complete guess.";
-        document.getElementById("feedback").classList.add("incorrect-feedback");
-      }
-    }
-
-    function resetCurrentGuess() {
-      currentGuess = "";
-      document.getElementById("guessDisplay").textContent = currentGuess;
-    }
-
-    function getHint() {
-      score -= 20;
-      statistics.totalHints++;
-      document.getElementById("score").textContent = score;
-      alert(`One of the digits is: ${decryptedSecret[0]}`);
-    }
-
-    function resetGame() {
-      currentGuess = "";
-      secretNumber = generateEncryptedSecretNumber(3);
-      decryptedSecret = atob(secretNumber);
-      score = 0;
-      level = 1;
-      statistics = { totalGuesses: 0, totalHints: 0, gamesPlayed: 0, totalTime: 0 };
-      history = [];
-      document.getElementById("guessDisplay").textContent = currentGuess;
-      document.getElementById("feedback").textContent = "";
-      document.getElementById("guessTableBody").innerHTML = "";
-      document.getElementById("score").textContent = score;
-      document.getElementById("level").textContent = level;
-      timeRemaining = 60;
-      document.getElementById("timer").textContent = timeRemaining;
-      if (timerRunning) {
-        clearInterval(timer);
-        timerRunning = false;
-      }
-    }
-
-    function changeDifficulty() {
-      const difficultySelect = document.getElementById("difficultySelect");
-      difficulty = difficultySelect.value;
-      if (difficulty === "Hard") {
-        secretNumber = generateEncryptedSecretNumber(decryptedSecret.length + 1);
-      } else {
-        secretNumber = generateEncryptedSecretNumber(3);
-      }
-      decryptedSecret = atob(secretNumber);
-      alert(`Difficulty set to: ${difficulty}`);
-    }
-
-    function toggleTimer() {
-      if (timerRunning) {
-        clearInterval(timer);
-        timerRunning = false;
-      } else {
-        timer = setInterval(() => {
-          timeRemaining--;
-          document.getElementById("timer").textContent = timeRemaining;
-          if (timeRemaining <= 0) {
-            clearInterval(timer);
-            alert("Time's up! Resetting the game.");
-            resetGame();
-          }
-        }, 1000);
-        timerRunning = true;
-      }
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
