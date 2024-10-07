@@ -54,30 +54,6 @@
       text-align: center;
     }
 
-    .tabs {
-      display: flex;
-      justify-content: space-around;
-      margin-bottom: 20px;
-    }
-    .tab-button {
-      padding: 10px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .tab-button.active {
-      background-color: #0056b3;
-    }
-
-    .tab-content {
-      display: none;
-    }
-    .tab-content.active {
-      display: block;
-    }
-
     .number-buttons {
       display: flex;
       flex-wrap: wrap;
@@ -146,6 +122,27 @@
       50% { transform: translateX(5px); }
       75% { transform: translateX(-5px); }
     }
+
+    .game-table {
+      width: 100%;
+      max-height: 300px;
+      overflow-y: auto;
+      margin-top: 20px;
+    }
+
+    .guess-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .guess-table th, .guess-table td {
+      border: 1px solid #ddd;
+      padding: 15px;
+      text-align: center;
+      font-size: 16px;
+    }
+    .guess-table th {
+      background-color: #f8f8f8;
+    }
   </style>
 </head>
 <body>
@@ -154,52 +151,35 @@
     <div class="rules-container">
       <p>Welcome to Guess the Number! In this game, your goal is to find out the secret number at each stage and achieve the lowest score possible.</p>
     </div>
-
-    <div class="tabs">
-      <button class="tab-button active" onclick="showTab('game')">Game</button>
-      <button class="tab-button" onclick="showTab('statistics')">Statistics</button>
-      <button class="tab-button" onclick="showTab('history')">History</button>
+    <div class="game-info">
+      <p>Level: <span id="level">1</span></p>
+      <p>Score: <span id="score">0</span></p>
+      <p>Secret number digits: <span id="digits">3</span></p>
+      <p>Your guess: <span id="guessDisplay"></span></p>
+      <p>Time Remaining: <span id="timer">60</span> seconds</p>
     </div>
-
-    <div id="game" class="tab-content active">
-      <div class="game-info">
-        <p>Level: <span id="level">1</span></p>
-        <p>Score: <span id="score">0</span></p>
-        <p>Secret number digits: <span id="digits">3</span></p>
-        <p>Your guess: <span id="guessDisplay"></span></p>
-        <p>Time Remaining: <span id="timer">60</span> seconds</p>
-      </div>
-      <div class="number-buttons">
-        <button class="number-button" onclick="addDigit(1)">1</button>
-        <button class="number-button" onclick="addDigit(2)">2</button>
-        <button class="number-button" onclick="addDigit(3)">3</button>
-        <button class="number-button" onclick="addDigit(4)">4</button>
-        <button class="number-button" onclick="addDigit(5)">5</button>
-        <button class="number-button" onclick="addDigit(6)">6</button>
-        <button class="number-button" onclick="addDigit(7)">7</button>
-        <button class="number-button" onclick="addDigit(8)">8</button>
-        <button class="number-button" onclick="addDigit(9)">9</button>
-      </div>
-      <div class="input-container">
-        <button id="deleteButton" class="button delete-button" onclick="deleteLastDigit()">Delete Last Digit</button>
-        <button id="guessButton" class="button submit-button" onclick="processGuess()">Guess</button>
-        <button id="hintButton" class="button hint-button" onclick="getHint()">Get Hint</button>
-        <button id="resetButton" class="button reset-button" onclick="resetGame()">Reset Game</button>
-        <button id="difficultyButton" class="button difficulty-button" onclick="changeDifficulty()">Change Difficulty</button>
-        <button id="timerButton" class="button timer-button" onclick="toggleTimer()">Start/Stop Timer</button>
-      </div>
-      <div id="feedback" class="feedback"></div>
+    <div class="input-container">
+      <button id="guessButton" class="button submit-button" onclick="processGuess()">Guess</button>
     </div>
-
-    <div id="statistics" class="tab-content">
-      <h2>Statistics</h2>
-      <p>Total Guesses: <span id="totalGuesses">0</span></p>
-      <p>Total Hints Used: <span id="totalHints">0</span></p>
-      <p>Games Played: <span id="gamesPlayed">0</span></p>
-      <p>Total Time Played: <span id="totalTime">0</span> seconds</p>
+    <div class="number-buttons">
+      <button class="number-button" onclick="addDigit(1)">1</button>
+      <button class="number-button" onclick="addDigit(2)">2</button>
+      <button class="number-button" onclick="addDigit(3)">3</button>
+      <button class="number-button" onclick="addDigit(4)">4</button>
+      <button class="number-button" onclick="addDigit(5)">5</button>
+      <button class="number-button" onclick="addDigit(6)">6</button>
+      <button class="number-button" onclick="addDigit(7)">7</button>
+      <button class="number-button" onclick="addDigit(8)">8</button>
+      <button class="number-button" onclick="addDigit(9)">9</button>
     </div>
-
-    <div id="history" class="tab-content">
+    <div class="input-container">
+      <button id="deleteButton" class="button delete-button" onclick="deleteLastDigit()">Delete Last Digit</button>
+      <button id="hintButton" class="button hint-button" onclick="getHint()">Get Hint</button>
+      <button id="resetButton" class="button reset-button" onclick="resetGame()">Reset Game</button>
+      <button id="difficultyButton" class="button difficulty-button" onclick="changeDifficulty()">Change Difficulty</button>
+      <button id="timerButton" class="button timer-button" onclick="toggleTimer()">Start/Stop Timer</button>
+    </div>
+    <div class="game-table">
       <h2>Previous Guesses</h2>
       <table class="guess-table">
         <thead>
@@ -214,6 +194,7 @@
         </tbody>
       </table>
     </div>
+    <div id="feedback" class="feedback"></div>
   </div>
 
   <script>
@@ -365,17 +346,6 @@
         }, 1000);
         timerRunning = true;
       }
-    }
-
-    function showTab(tabId) {
-      const tabContents = document.querySelectorAll('.tab-content');
-      tabContents.forEach(content => content.classList.remove('active'));
-
-      const tabButtons = document.querySelectorAll('.tab-button');
-      tabButtons.forEach(button => button.classList.remove('active'));
-
-      document.getElementById(tabId).classList.add('active');
-      document.querySelector(`[onclick="showTab('${tabId}')"]`).classList.add('active');
     }
   </script>
 </body>
