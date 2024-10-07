@@ -19,8 +19,8 @@
 
     /* Main game container styling */
     .game-container {
-      width: 90%;
-      max-width: 1200px;
+      width: 95%;
+      max-width: 600px;
       background-color: rgba(255, 255, 255, 0.9);
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -46,18 +46,17 @@
     /* Game info styling */
     .game-info {
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
       margin-bottom: 20px;
-      flex-wrap: wrap;
     }
 
     /* Main content area styling */
     .main-content {
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       gap: 20px;
       width: 100%;
-      flex-wrap: wrap;
     }
 
     /* Input container styling */
@@ -65,7 +64,6 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      flex: 1;
       width: 100%;
     }
 
@@ -133,15 +131,15 @@
 
     /* Game table styling */
     .game-table {
-      flex: 1;
-      max-height: 500px;
+      width: 100%;
+      max-height: 300px;
       overflow-y: auto;
+      margin-top: 20px;
     }
 
     /* Guess table styling */
     .guess-table {
       width: 100%;
-      margin-top: 20px;
       border-collapse: collapse;
     }
     .guess-table th, .guess-table td {
