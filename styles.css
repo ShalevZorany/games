@@ -2,15 +2,12 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background: #f0f0f0;
   direction: rtl;
+  /* הסרנו את הגדרות הגובה והמיקום כדי לאפשר גלילה */
 }
 
 .game-container {
+  margin: 20px auto;
   width: 95%;
   max-width: 600px;
   background-color: rgba(255, 255, 255, 0.9);
@@ -88,6 +85,13 @@ body {
   color: #fff;
   font-size: 28px;
   cursor: pointer;
+  /* מניעת הדגשה ואפקטים בלחיצה */
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.number-button:active {
+  opacity: 0.8;
 }
 
 .button {
