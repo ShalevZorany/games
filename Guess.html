@@ -59,6 +59,29 @@
       text-align: center;
     }
 
+    /* Game table styling */
+    .game-table {
+      width: 100%;
+      max-height: 300px;
+      overflow-y: auto;
+      margin-top: 20px;
+    }
+
+    /* Guess table styling */
+    .guess-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .guess-table th, .guess-table td {
+      border: 1px solid #ddd;
+      padding: 15px;
+      text-align: center;
+      font-size: 16px;
+    }
+    .guess-table th {
+      background-color: #f8f8f8;
+    }
+
     /* Main content area styling */
     .main-content {
       display: flex;
@@ -153,29 +176,6 @@
       50% { transform: translateX(5px); }
       75% { transform: translateX(-5px); }
     }
-
-    /* Game table styling */
-    .game-table {
-      width: 100%;
-      max-height: 300px;
-      overflow-y: auto;
-      margin-top: 20px;
-    }
-
-    /* Guess table styling */
-    .guess-table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    .guess-table th, .guess-table td {
-      border: 1px solid #ddd;
-      padding: 15px;
-      text-align: center;
-      font-size: 16px;
-    }
-    .guess-table th {
-      background-color: #f8f8f8;
-    }
   </style>
 </head>
 <body>
@@ -190,6 +190,22 @@
       <p>Secret number digits: <span id="digits">3</span></p>
       <p>Your guess: <span id="guessDisplay"></span></p>
       <p>Time Remaining: <span id="timer">60</span> seconds</p>
+    </div>
+    <div class="game-table">
+      <h2>Previous Guesses</h2>
+      <table class="guess-table">
+        <thead>
+          <tr>
+            <th>Guess</th> <!-- Column for the guessed number -->
+            <th>Correct Place</th> <!-- Column for digits in the correct place -->
+            <th>Correct Digit (Wrong Place)</th> <!-- Column for correct digits in the wrong place -->
+            <th>Incorrect Digits</th> <!-- Column for incorrect digits -->
+          </tr>
+        </thead>
+        <tbody id="guessTableBody">
+          <!-- Rows of previous guesses will be dynamically inserted here -->
+        </tbody>
+      </table>
     </div>
     <div class="main-content">
       <div class="input-container">
@@ -223,22 +239,6 @@
         <button id="historyButton" class="history-button" onclick="viewHistory()">View History</button>
         <!-- Button to start/stop the timer -->
         <button id="timerButton" class="timer-button" onclick="toggleTimer()">Start/Stop Timer</button>
-      </div>
-      <div class="game-table">
-        <h2>Previous Guesses</h2>
-        <table class="guess-table">
-          <thead>
-            <tr>
-              <th>Guess</th> <!-- Column for the guessed number -->
-              <th>Correct Place</th> <!-- Column for digits in the correct place -->
-              <th>Correct Digit (Wrong Place)</th> <!-- Column for correct digits in the wrong place -->
-              <th>Incorrect Digits</th> <!-- Column for incorrect digits -->
-            </tr>
-          </thead>
-          <tbody id="guessTableBody">
-            <!-- Rows of previous guesses will be dynamically inserted here -->
-          </tbody>
-        </table>
       </div>
     </div>
     <div id="feedback" class="feedback"></div> <!-- Area for feedback after each guess -->
